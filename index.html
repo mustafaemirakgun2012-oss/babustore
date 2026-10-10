@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BABU STORE</title>
+<title>AZRAILBABA</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:system-ui,sans-serif;background:#08080c;color:#e8e8ec;line-height:1.6;min-height:100vh}
@@ -35,12 +35,8 @@ h2{font-size:32px;font-weight:800;text-align:center;margin-bottom:40px;color:#ff
 .plan button{width:100%;padding:12px;background:#ff2e63;color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:700;font-size:14px}
 .plan button:hover{background:#ff0055}
 footer{border-top:1px solid #222;padding:32px 24px;text-align:center;color:#666;font-size:13px;margin-top:60px}
-
-/* TOAST */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#141418;border:1px solid #2a2a35;border-radius:10px;padding:14px 22px;color:#fff;z-index:99999;font-size:14px;box-shadow:0 12px 40px rgba(0,0,0,.6);max-width:90vw;animation:tin .3s ease}
 @keyframes tin{from{opacity:0;transform:translate(-50%,20px)}to{opacity:1;transform:translate(-50%,0)}}
-
-/* ADMIN MODAL */
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:9999;padding:16px;overflow-y:auto}
 .modal.open{display:block}
 .mbox{max-width:900px;margin:20px auto;background:#0d0d12;border:1px solid #262626;border-radius:16px;padding:24px}
@@ -51,11 +47,10 @@ footer{border-top:1px solid #222;padding:32px 24px;text-align:center;color:#666;
 .mstat{background:#141418;border:1px solid #262626;border-radius:8px;padding:12px;text-align:center}
 .mstat .n{font-size:22px;font-weight:800;color:#ff2e63}
 .mstat .l{font-size:10px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
-.mform{background:#141418;border:1px solid #262626;border-radius:10px;padding:14px;margin-bottom:14px;display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end}
+.mform{background:#141418;border:1px solid #262626;border-radius:10px;padding:14px;margin-bottom:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end}
 .mform label{display:block;color:#888;font-size:11px;text-transform:uppercase;margin-bottom:4px}
-.mform input,.mform select{width:100%;padding:8px 10px;background:#0a0a0f;border:1px solid #333;color:#fff;border-radius:6px;font-family:inherit;font-size:13px}
-.mform button{grid-column:span 3;padding:10px;background:linear-gradient(135deg,#ff2e63,#ff0055);color:#fff;border:none;border-radius:6px;cursor:pointer;font-family:inherit;font-weight:600;font-size:13px}
-@media(max-width:600px){.mform{grid-template-columns:1fr}.mform button{grid-column:span 1}}
+.mform input{width:100%;padding:8px 10px;background:#0a0a0f;border:1px solid #333;color:#fff;border-radius:6px;font-family:inherit;font-size:13px}
+.mform button{grid-column:1/-1;padding:10px;background:linear-gradient(135deg,#ff2e63,#ff0055);color:#fff;border:none;border-radius:6px;cursor:pointer;font-family:inherit;font-weight:600;font-size:13px}
 table{width:100%;border-collapse:collapse;background:#141418;border-radius:10px;overflow:hidden;font-size:12px}
 th{background:#1a1a20;color:#ff2e63;padding:10px 8px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
 td{padding:10px 8px;border-top:1px solid #1f1f28;color:#c0c0d0}
@@ -73,7 +68,7 @@ td button:hover{background:#e74c3c;color:#fff}
 
 <header>
   <nav>
-    <div class="logo">◈ BABU.STORE</div>
+    <div class="logo">◈ AZRAILBABA</div>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
       <button class="btn-admin" onclick="adminLogin()">🔐 Admin</button>
       <button class="btn-cta" onclick="toast('Yakında aktif.','#ff2e63')">Giriş Yap</button>
@@ -111,45 +106,32 @@ td button:hover{background:#e74c3c;color:#fff}
   </div>
 </section>
 
-<footer>© 2026 BABU.STORE — Tüm hakları saklıdır.</footer>
+<footer>© 2026 AZRAILBABA — Tüm hakları saklıdır.</footer>
 
-<!-- ADMIN PANEL -->
 <div class="modal" id="adminModal">
   <div class="mbox">
     <div class="mhead">
       <h3>🔐 ADMIN PANEL</h3>
       <button onclick="adminClose()">Kapat</button>
     </div>
-
     <div class="mstats" id="mstats"></div>
-
     <div class="mform">
-      <div>
-        <label>Süre (gün)</label>
-        <input id="keyDays" type="number" value="30" min="1">
-      </div>
-      <div>
-        <label>Adet</label>
-        <input id="keyCount" type="number" value="1" min="1" max="50">
-      </div>
-      <button onclick="generateKeys()" style="grid-column:1/-1">YENİ KEY ÜRET</button>
+      <div><label>Süre (gün)</label><input id="keyDays" type="number" value="30" min="1"></div>
+      <div><label>Adet</label><input id="keyCount" type="number" value="1" min="1" max="50"></div>
+      <button onclick="generateKeys()">YENİ KEY ÜRET</button>
     </div>
-
     <div style="margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap">
       <button onclick="exportCSV()" style="flex:1;padding:10px;background:#1f1f28;color:#2ecc71;border:1px solid #2ecc71;border-radius:6px;cursor:pointer;font-family:inherit">📥 CSV İndir</button>
       <button onclick="copyJSON()" style="flex:1;padding:10px;background:#1f1f28;color:#f39c12;border:1px solid #f39c12;border-radius:6px;cursor:pointer;font-family:inherit">📋 keys.json Kopyala</button>
       <button onclick="clearAll()" style="flex:1;padding:10px;background:#1f1f28;color:#e74c3c;border:1px solid #e74c3c;border-radius:6px;cursor:pointer;font-family:inherit">🗑 Hepsini Sil</button>
     </div>
-
     <div id="keysList"></div>
   </div>
 </div>
 
 <script>
-// ============ AYAR ============
-var ADMIN_PASS = 'deni123';   // ← şifreyi değiştir
+var ADMIN_PASS = 'deni123';
 
-// ============ YARDIMCI ============
 function toast(html, color){
     var t = document.createElement('div');
     t.className = 'toast';
@@ -163,7 +145,6 @@ function toast(html, color){
     }, 4000);
 }
 
-// ============ KEY SORGULA ============
 function keyCheck(){
     var k = prompt('Key kodunu gir:');
     if(!k || k.trim() === '') return;
@@ -175,12 +156,10 @@ function keyCheck(){
     }, 1200);
 }
 
-// ============ PLAN SEÇ ============
 function selectPlan(name, price){
     toast('<b style="color:#ff2e63">🛒 ' + name + ' Plan</b><br>Fiyat: <b>₺' + price + '</b>', '#ff2e63');
 }
 
-// ============ ADMIN GİRİŞ ============
 function adminLogin(){
     var p = prompt('Admin şifresi:');
     if(p === ADMIN_PASS){
@@ -197,14 +176,13 @@ function adminClose(){
     document.body.style.overflow = '';
 }
 
-// ============ STORAGE ============
 function loadKeys(){
-    try { return JSON.parse(localStorage.getItem('babu_keys') || '[]'); }
+    try { return JSON.parse(localStorage.getItem('azrail_keys') || '[]'); }
     catch(e) { return []; }
 }
-function saveKeys(k){ localStorage.setItem('babu_keys', JSON.stringify(k)); }
 
-// ============ KEY ÜRET ============
+function saveKeys(k){ localStorage.setItem('azrail_keys', JSON.stringify(k)); }
+
 function genKey(){
     var c = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', parts = [];
     for(var p = 0; p < 4; p++){
@@ -217,28 +195,18 @@ function genKey(){
 
 function generateKeys(){
     var days = parseInt(document.getElementById('keyDays').value) || 30;
-    var cnt  = Math.min(50, parseInt(document.getElementById('keyCount').value) || 1);
+    var cnt = Math.min(50, parseInt(document.getElementById('keyCount').value) || 1);
     var keys = loadKeys(), now = Date.now();
     for(var i = 0; i < cnt; i++){
-        keys.push({
-            key: genKey(),
-            days: days,
-            created: now,
-            expires: now + days * 86400000,
-            hwid: null,
-            banned: false
-        });
+        keys.push({key: genKey(), days: days, created: now, expires: now + days*86400000, hwid: null, banned: false});
     }
     saveKeys(keys);
     renderKeys();
     toast('<span style="color:#2ecc71">✓</span> ' + cnt + ' key üretildi.', '#2ecc71');
 }
 
-// ============ LİSTELE ============
 function renderKeys(){
     var keys = loadKeys();
-
-    // İstatistik
     var now = Date.now();
     var aktif = 0, suresi = 0, banli = 0;
     keys.forEach(function(k){
@@ -252,31 +220,25 @@ function renderKeys(){
         '<div class="mstat"><div class="n" style="color:#f39c12">' + suresi + '</div><div class="l">Süresi Dolmuş</div></div>' +
         '<div class="mstat"><div class="n" style="color:#e74c3c">' + banli + '</div><div class="l">Banlı</div></div>';
 
-    // Liste
     var list = document.getElementById('keysList');
     if(keys.length === 0){
         list.innerHTML = '<div style="text-align:center;padding:30px;color:#666">Henüz key yok.</div>';
         return;
     }
-
     var h = '<table><tr><th>Key</th><th>Süre</th><th>Durum</th><th>İşlem</th></tr>';
     keys.forEach(function(k, i){
         var left = k.expires - Date.now();
         var dl = Math.floor(left / 86400000);
         var st = k.banned ? '<span class="tag t-no">BAN</span>'
                : (left < 0 ? '<span class="tag t-w">SÜRESİ DOLDU</span>' : '<span class="tag t-ok">AKTİF ' + dl + 'g</span>');
-        h += '<tr>';
-        h += '<td><span class="kc" onclick="copyKey(\'' + k.key + '\')">' + k.key + '</span></td>';
-        h += '<td>' + k.days + ' gün</td>';
-        h += '<td>' + st + '</td>';
-        h += '<td><button onclick="delKey(' + i + ')">Sil</button></td>';
-        h += '</tr>';
+        h += '<tr><td><span class="kc" onclick="copyKey(\'' + k.key + '\')">' + k.key + '</span></td>';
+        h += '<td>' + k.days + ' gün</td><td>' + st + '</td>';
+        h += '<td><button onclick="delKey(' + i + ')">Sil</button></td></tr>';
     });
     h += '</table>';
     list.innerHTML = h;
 }
 
-// ============ SİL ============
 function delKey(i){
     if(!confirm('Silinsin mi?')) return;
     var keys = loadKeys();
@@ -287,15 +249,13 @@ function delKey(i){
 
 function clearAll(){
     if(!confirm('TÜM keyler silinecek. Emin misin?')) return;
-    localStorage.removeItem('babu_keys');
+    localStorage.removeItem('azrail_keys');
     renderKeys();
 }
 
-// ============ KOPYALA ============
 function copyKey(k){
-    if(navigator.clipboard){
-        navigator.clipboard.writeText(k);
-    } else {
+    if(navigator.clipboard){ navigator.clipboard.writeText(k); }
+    else {
         var t = document.createElement('textarea');
         t.value = k; document.body.appendChild(t); t.select();
         document.execCommand('copy'); document.body.removeChild(t);
@@ -303,7 +263,6 @@ function copyKey(k){
     toast('<span style="color:#2ecc71">✓</span> Kopyalandı: ' + k, '#2ecc71');
 }
 
-// ============ CSV ============
 function exportCSV(){
     var keys = loadKeys();
     if(keys.length === 0){ toast('Önce key üret.', '#e74c3c'); return; }
@@ -319,24 +278,18 @@ function exportCSV(){
     toast('<span style="color:#2ecc71">✓</span> keys.csv indirildi.', '#2ecc71');
 }
 
-// ============ JSON KOPYALA (Lua için) ============
 function copyJSON(){
     var keys = loadKeys();
     if(keys.length === 0){ toast('Önce key üret.', '#e74c3c'); return; }
     var data = {
         keys: keys.map(function(k){
-            return {
-                key: k.key,
-                hwid: k.hwid || null,
-                expires: Math.floor(k.expires / 1000),
-                banned: k.banned ? true : false
-            };
+            return {key: k.key, hwid: k.hwid || null, expires: Math.floor(k.expires/1000), banned: k.banned ? true : false};
         })
     };
     var json = JSON.stringify(data, null, 2);
     if(navigator.clipboard){
         navigator.clipboard.writeText(json);
-        toast('<span style="color:#2ecc71">✓</span> keys.json kopyalandı! GitHub\'a yapıştır.', '#2ecc71');
+        toast('<span style="color:#2ecc71">✓</span> keys.json kopyalandı!', '#2ecc71');
     } else {
         var t = document.createElement('textarea');
         t.value = json; document.body.appendChild(t); t.select();
@@ -347,4 +300,4 @@ function copyJSON(){
 </script>
 
 </body>
-    </html>
+                                </html>
