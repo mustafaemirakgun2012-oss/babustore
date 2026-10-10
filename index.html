@@ -27,7 +27,7 @@ nav{max-width:1240px;margin:0 auto;padding:18px 24px;display:flex;justify-conten
 .nav-links a:hover{color:#fff}
 .nav-cta{padding:10px 22px;background:linear-gradient(135deg,#ff2e63,#ff0055);color:#fff;border-radius:8px;font-weight:600;font-size:14px;box-shadow:0 4px 20px rgba(255,46,99,.3);cursor:pointer;border:none;font-family:inherit;transition:all .2s}
 .nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(255,46,99,.5)}
-.burger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
 .burger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:.3s}
 .hero{max-width:1240px;margin:0 auto;padding:100px 24px 80px;text-align:center}
 .badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(255,46,99,.1);border:1px solid rgba(255,46,99,.3);border-radius:100px;font-size:12px;font-weight:600;color:#ff2e63;letter-spacing:1px;text-transform:uppercase;margin-bottom:24px}
@@ -80,18 +80,16 @@ section{padding:100px 24px;position:relative}
 .faq{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
 .faq-item{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:12px;overflow:hidden;transition:border .3s}
 .faq-item.open{border-color:rgba(255,46,99,.3)}
-.faq-q{padding:20px 24px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:600;font-size:15px;user-select:none}
+.faq-q{padding:20px 24px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:600;font-size:15px;user-select:none;gap:16px}
 .faq-q:hover{color:#ff2e63}
 .faq-icon{width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,46,99,.1);color:#ff2e63;font-size:16px;font-weight:700;transition:transform .3s;flex-shrink:0}
 .faq-item.open .faq-icon{transform:rotate(45deg)}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s;color:#8a8a9a;font-size:14px;padding:0 24px}
 .faq-item.open .faq-a{max-height:300px;padding:0 24px 20px}
 .cta{max-width:900px;margin:0 auto;padding:60px 40px;background:linear-gradient(135deg,rgba(255,46,99,.1),rgba(139,46,255,.08));border:1px solid rgba(255,46,99,.2);border-radius:24px;text-align:center;position:relative;overflow:hidden}
-.cta::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,46,99,.15),transparent 40%);animation:rotate 20s linear infinite}
-@keyframes rotate{to{transform:rotate(360deg)}}
-.cta > *{position:relative;z-index:1}
-.cta h2{font-size:clamp(28px,4vw,40px);font-weight:800;letter-spacing:-1px;margin-bottom:14px}
-.cta p{color:#a0a0b0;margin-bottom:32px;font-size:16px}
+.cta h2{font-size:clamp(28px,4vw,40px);font-weight:800;letter-spacing:-1px;margin-bottom:14px;position:relative}
+.cta p{color:#a0a0b0;margin-bottom:32px;font-size:16px;position:relative}
+.cta .btn{position:relative}
 footer{border-top:1px solid rgba(255,255,255,.06);padding:48px 24px 32px;margin-top:60px}
 .footer-inner{max-width:1240px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.06)}
 .footer-col h4{font-size:13px;color:#fff;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px}
@@ -117,6 +115,8 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:48px 24px 32px;margin-
 .hero p{animation-delay:.3s}
 .hero-buttons{animation-delay:.4s}
 .hero-stats{animation-delay:.5s}
+.key-result-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#141414;border:1px solid #2a2a2a;border-radius:10px;padding:14px 22px;color:#fff;z-index:9999;font-size:14px;box-shadow:0 12px 40px rgba(0,0,0,.6);max-width:90vw;animation:toastIn .3s ease;font-family:'Inter',sans-serif}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,20px)}to{opacity:1;transform:translate(-50%,0)}}
 </style>
 </head>
 <body>
@@ -127,11 +127,11 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:48px 24px 32px;margin-
       <span class="logo-dot"></span>
       BABU<span>.STORE</span>
     </div>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a href="#ozellikler">Özellikler</a>
       <a href="#planlar">Planlar</a>
       <a href="#sss">SSS</a>
-      <button class="nav-cta" onclick="alert('Yakında aktif olacak.')">Giriş Yap</button>
+      <button class="nav-cta" onclick="openLogin()">Giriş Yap</button>
     </div>
     <div class="burger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
@@ -295,8 +295,4 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:48px 24px 32px;margin-
         <div class="faq-a">Havale/EFT, Papara, Shopier ve kripto (USDT/BTC). Sipariş sırasında seçenekleri görürsün.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">İade var mı?<span class="faq-icon">+</span></div>
-        <div class="faq-a">Key kullanılmadıysa 24 saat içinde iade edilir. HWID kilitlendikten sonra iade yapılamaz.</div>
-      </div>
-      <div class="faq-item">
-        
+        <div class="faq-q" onclick="toggleFaq(this)">
