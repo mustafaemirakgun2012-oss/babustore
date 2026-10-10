@@ -10,7 +10,9 @@ body{font-family:system-ui,sans-serif;background:#08080c;color:#e8e8ec;line-heig
 header{background:rgba(8,8,12,.9);border-bottom:1px solid #222;padding:16px 24px;position:sticky;top:0;z-index:100}
 nav{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .logo{color:#ff2e63;font-weight:800;font-size:20px;font-family:monospace}
-nav button{padding:8px 16px;border-radius:8px;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:13px}
+nav button,nav a{padding:8px 16px;border-radius:8px;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:13px;text-decoration:none;display:inline-block}
+.btn-tg{background:transparent;color:#29b6f6;border:1px solid #29b6f6}
+.btn-tg:hover{background:rgba(41,182,246,.1)}
 .btn-admin{background:transparent;color:#f39c12;border:1px solid #f39c12}
 .btn-admin:hover{background:rgba(243,156,18,.1)}
 .btn-cta{background:linear-gradient(135deg,#ff2e63,#ff0055);color:#fff}
@@ -35,6 +37,7 @@ h2{font-size:32px;font-weight:800;text-align:center;margin-bottom:40px;color:#ff
 .plan button{width:100%;padding:12px;background:#ff2e63;color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:700;font-size:14px}
 .plan button:hover{background:#ff0055}
 footer{border-top:1px solid #222;padding:32px 24px;text-align:center;color:#666;font-size:13px;margin-top:60px}
+footer a{color:#29b6f6;text-decoration:none}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#141418;border:1px solid #2a2a35;border-radius:10px;padding:14px 22px;color:#fff;z-index:99999;font-size:14px;box-shadow:0 12px 40px rgba(0,0,0,.6);max-width:90vw;animation:tin .3s ease}
 @keyframes tin{from{opacity:0;transform:translate(-50%,20px)}to{opacity:1;transform:translate(-50%,0)}}
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:9999;padding:16px;overflow-y:auto}
@@ -70,18 +73,18 @@ td button:hover{background:#e74c3c;color:#fff}
   <nav>
     <div class="logo">◈ AZRAILBABA</div>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a href="https://t.me/azrailno1" target="_blank" class="btn-tg">💬 Telegram</a>
       <button class="btn-admin" onclick="adminLogin()">🔐 Admin</button>
-      <button class="btn-cta" onclick="toast('Yakında aktif.','#ff2e63')">Giriş Yap</button>
     </div>
   </nav>
 </header>
 
 <div class="hero">
   <h1>PUBG Mobile için<br><span class="grad">Premium Key Sistemi</span></h1>
-  <p>Anında teslim, HWID kilitli, otomatik doğrulama.</p>
+  <p>Anında teslim, HWID kilitli, otomatik doğrulama. Telegram üzerinden hızlı iletişim.</p>
   <div class="btns">
     <button class="btn btn-p" onclick="document.getElementById('planlar').scrollIntoView({behavior:'smooth'})">Planları Gör</button>
-    <button class="btn btn-g" onclick="keyCheck()">Key Sorgula</button>
+    <a href="https://t.me/azrailno1" target="_blank" class="btn btn-g" style="text-decoration:none">💬 Telegram'a Yaz</a>
   </div>
 </div>
 
@@ -106,7 +109,12 @@ td button:hover{background:#e74c3c;color:#fff}
   </div>
 </section>
 
-<footer>© 2026 AZRAILBABA — Tüm hakları saklıdır.</footer>
+<footer>
+  <div style="margin-bottom:12px">
+    <a href="https://t.me/azrailno1" target="_blank">💬 Telegram: @azrailno1</a>
+  </div>
+  © 2026 AZRAILBABA — Tüm hakları saklıdır.
+</footer>
 
 <div class="modal" id="adminModal">
   <div class="mbox">
@@ -121,16 +129,17 @@ td button:hover{background:#e74c3c;color:#fff}
       <button onclick="generateKeys()">YENİ KEY ÜRET</button>
     </div>
     <div style="margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap">
-      <button onclick="exportCSV()" style="flex:1;padding:10px;background:#1f1f28;color:#2ecc71;border:1px solid #2ecc71;border-radius:6px;cursor:pointer;font-family:inherit">📥 CSV İndir</button>
-      <button onclick="copyJSON()" style="flex:1;padding:10px;background:#1f1f28;color:#f39c12;border:1px solid #f39c12;border-radius:6px;cursor:pointer;font-family:inherit">📋 keys.json Kopyala</button>
-      <button onclick="clearAll()" style="flex:1;padding:10px;background:#1f1f28;color:#e74c3c;border:1px solid #e74c3c;border-radius:6px;cursor:pointer;font-family:inherit">🗑 Hepsini Sil</button>
+      <button onclick="exportCSV()" style="flex:1;padding:10px;background:#1f1f28;color:#2ecc71;border:1px solid #2ecc71;border-radius:6px;cursor:pointer;font-family:inherit">📥 CSV</button>
+      <button onclick="copyJSON()" style="flex:1;padding:10px;background:#1f1f28;color:#f39c12;border:1px solid #f39c12;border-radius:6px;cursor:pointer;font-family:inherit">📋 keys.json</button>
+      <button onclick="clearAll()" style="flex:1;padding:10px;background:#1f1f28;color:#e74c3c;border:1px solid #e74c3c;border-radius:6px;cursor:pointer;font-family:inherit">🗑 Sil</button>
     </div>
     <div id="keysList"></div>
   </div>
 </div>
 
 <script>
-var ADMIN_PASS = 'deni123';
+var ADMIN_PASS = 'emirbaba01';
+var TELEGRAM = 'azrailno1';
 
 function toast(html, color){
     var t = document.createElement('div');
@@ -145,19 +154,11 @@ function toast(html, color){
     }, 4000);
 }
 
-function keyCheck(){
-    var k = prompt('Key kodunu gir:');
-    if(!k || k.trim() === '') return;
-    k = k.trim().toUpperCase();
-    if(k.length < 8){ toast('<span style="color:#e74c3c">✗</span> Geçersiz key.', '#e74c3c'); return; }
-    toast('<span style="color:#f39c12">⏳</span> Sorgulanıyor... ' + k, '#f39c12');
-    setTimeout(function(){
-        toast('<span style="color:#2ecc71">✓</span> Key aktif görünüyor.', '#2ecc71');
-    }, 1200);
-}
-
 function selectPlan(name, price){
-    toast('<b style="color:#ff2e63">🛒 ' + name + ' Plan</b><br>Fiyat: <b>₺' + price + '</b>', '#ff2e63');
+    var msg = 'Merhaba! AZRAILBABA üzerinden ' + name + ' plan (' + price + ' TL) almak istiyorum.';
+    var url = 'https://t.me/' + TELEGRAM + '?text=' + encodeURIComponent(msg);
+    toast('<b style="color:#29b6f6">💬 Telegram açılıyor...</b><br>Plan: ' + name + ' — ₺' + price, '#29b6f6');
+    setTimeout(function(){ window.open(url, '_blank'); }, 800);
 }
 
 function adminLogin(){
@@ -180,7 +181,6 @@ function loadKeys(){
     try { return JSON.parse(localStorage.getItem('azrail_keys') || '[]'); }
     catch(e) { return []; }
 }
-
 function saveKeys(k){ localStorage.setItem('azrail_keys', JSON.stringify(k)); }
 
 function genKey(){
@@ -300,4 +300,4 @@ function copyJSON(){
 </script>
 
 </body>
-                                </html>
+      </html>
