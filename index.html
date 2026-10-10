@@ -295,4 +295,144 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:48px 24px 32px;margin-
         <div class="faq-a">Havale/EFT, Papara, Shopier ve kripto (USDT/BTC). Sipariş sırasında seçenekleri görürsün.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
+              <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Ödeme yöntemleri neler?<span class="faq-icon">+</span></div>
+        <div class="faq-a">Havale/EFT, Papara, Shopier ve kripto (USDT/BTC). Sipariş sırasında seçenekleri görürsün.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">İade var mı?<span class="faq-icon">+</span></div>
+        <div class="faq-a">Key kullanılmadıysa 24 saat içinde iade edilir. HWID kilitlendikten sonra iade yapılamaz.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Destek nasıl alırım?<span class="faq-icon">+</span></div>
+        <div class="faq-a">Discord sunucumuz ve Telegram kanalımız üzerinden 7/24 ulaşabilirsin. Ortalama yanıt süresi 5 dakikadır.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="cta">
+    <h2>Hemen başlamaya hazır mısın?</h2>
+    <p>30 saniyede key'ini al, oyuna gir. Kredi kartı gerekmez.</p>
+    <a href="#planlar" class="btn btn-primary">PLAN SEÇ</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <div class="logo" style="margin-bottom:16px">
+        <span class="logo-dot"></span>
+        BABU<span>.STORE</span>
+      </div>
+      <p style="color:#8a8a9a;font-size:13px;max-width:280px">PUBG Mobile için premium key hizmeti. Anında teslim, güvenli ödeme, 7/24 destek.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Ürün</h4>
+      <a href="#planlar">Planlar</a>
+      <a href="#ozellikler">Özellikler</a>
+      <a href="#sss">SSS</a>
+    </div>
+    <div class="footer-col">
+      <h4>Destek</h4>
+      <a href="#">Discord</a>
+      <a href="#">Telegram</a>
+      <a href="#">İletişim</a>
+    </div>
+    <div class="footer-col">
+      <h4>Yasal</h4>
+      <a href="#">Kullanım Şartları</a>
+      <a href="#">Gizlilik</a>
+      <a href="#">İade Politikası</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 BABU.STORE — Tüm hakları saklıdır.</div>
+    <div>Made with ❤ for the community</div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+    var links = document.getElementById('navLinks');
+    if(!links) return;
+    if(links.style.display === 'flex'){
+        links.style.display = '';
+    } else {
+        links.style.display = 'flex';
+        links.style.position = 'absolute';
+        links.style.top = '100%';
+        links.style.left = '0';
+        links.style.right = '0';
+        links.style.flexDirection = 'column';
+        links.style.background = '#0d0d12';
+        links.style.padding = '20px';
+        links.style.borderBottom = '1px solid rgba(255,255,255,.06)';
+    }
+}
+
+function toggleFaq(el){
+    el.parentElement.classList.toggle('open');
+}
+
+function showToast(html, borderColor, duration){
+    var existing = document.getElementById('babuToast');
+    if(existing) existing.parentNode.removeChild(existing);
+    var toast = document.createElement('div');
+    toast.id = 'babuToast';
+    toast.className = 'key-result-toast';
+    toast.style.borderColor = borderColor;
+    toast.innerHTML = html;
+    document.body.appendChild(toast);
+    setTimeout(function(){
+        if(toast.parentNode) {
+            toast.style.opacity = '0';
+            toast.style.transition = 'opacity .3s';
+            setTimeout(function(){
+                if(toast.parentNode) toast.parentNode.removeChild(toast);
+            }, 300);
+        }
+    }, duration || 4000);
+}
+
+function selectPlan(name, price){
+    showToast(
+        '<div style="font-weight:700;margin-bottom:6px;color:#ff2e63">🛒 ' + name + ' Plan</div>' +
+        '<div style="color:#a0a0b0;font-size:13px">Fiyat: <strong style="color:#fff">₺' + price + '</strong></div>' +
+        '<div style="color:#6a6a7a;font-size:12px;margin-top:6px">Demo modu — gerçek ödeme yakında aktif.</div>',
+        '#ff2e63', 4000
+    );
+}
+
+function keyCheck(){
+    var key = prompt('Key kodunu gir:\n\nÖrnek: A1B2-C3D4-E5F6');
+    if(!key || key.trim() === '') return;
+    var upperKey = key.trim().toUpperCase();
+    if(upperKey.length < 8){
+        showToast('<span style="color:#e74c3c">✗</span> Geçersiz key formatı. En az 8 karakter olmalı.', '#e74c3c', 4000);
+        return;
+    }
+    showToast('<span style="color:#f39c12">⏳</span> Sorgulanıyor... <strong style="color:#fff">' + upperKey + '</strong>', '#f39c12', 1500);
+    setTimeout(function(){
+        showToast(
+            '<span style="color:#2ecc71">✓</span> Key aktif görünüyor.<br>' +
+            '<span style="color:#6a6a7a;font-size:12px">Demo — gerçek doğrulama için sunucu gerekli.</span>',
+            '#2ecc71', 4000
+        );
+    }, 1500);
+}
+
+function openLogin(){
+    showToast(
+        '<div style="font-weight:700;color:#ff2e63;margin-bottom:6px">🔐 Giriş Sistemi</div>' +
+        '<div style="color:#8a8a9a;font-size:13px">Yakında aktif olacak. Discord üzerinden ulaş.</div>',
+        '#ff2e63', 4000
+    );
+}
+</script>
+
+</body>
+    </html>
