@@ -22,11 +22,13 @@ nav{max-width:1240px;margin:0 auto;padding:18px 24px;display:flex;justify-conten
 .logo-dot{width:10px;height:10px;border-radius:50%;background:#ff2e63;box-shadow:0 0 12px #ff2e63,0 0 24px rgba(255,46,99,.5);animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.15);opacity:.7}}
 .logo span{color:#ff2e63}
-.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links{display:flex;align-items:center;gap:24px}
 .nav-links a{color:#a0a0b0;text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
 .nav-links a:hover{color:#fff}
 .nav-cta{padding:10px 22px;background:linear-gradient(135deg,#ff2e63,#ff0055);color:#fff;border-radius:8px;font-weight:600;font-size:14px;box-shadow:0 4px 20px rgba(255,46,99,.3);cursor:pointer;border:none;font-family:inherit;transition:all .2s}
 .nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(255,46,99,.5)}
+.nav-admin{padding:8px 16px;background:transparent;color:#f39c12;border:1px solid #f39c12;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;font-family:inherit;transition:all .2s}
+.nav-admin:hover{background:rgba(243,156,18,.1)}
 .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
 .burger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:.3s}
 .hero{max-width:1240px;margin:0 auto;padding:100px 24px 80px;text-align:center}
@@ -115,8 +117,57 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:48px 24px 32px;margin-
 .hero p{animation-delay:.3s}
 .hero-buttons{animation-delay:.4s}
 .hero-stats{animation-delay:.5s}
-.key-result-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#141414;border:1px solid #2a2a2a;border-radius:10px;padding:14px 22px;color:#fff;z-index:9999;font-size:14px;box-shadow:0 12px 40px rgba(0,0,0,.6);max-width:90vw;animation:toastIn .3s ease;font-family:'Inter',sans-serif}
+.key-result-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#141414;border:1px solid #2a2a2a;border-radius:10px;padding:14px 22px;color:#fff;z-index:99999;font-size:14px;box-shadow:0 12px 40px rgba(0,0,0,.6);max-width:90vw;animation:toastIn .3s ease;font-family:'Inter',sans-serif}
 @keyframes toastIn{from{opacity:0;transform:translate(-50%,20px)}to{opacity:1;transform:translate(-50%,0)}}
+
+/* ADMIN PANEL */
+.admin-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:99998;padding:16px;overflow-y:auto;backdrop-filter:blur(8px)}
+.admin-box{max-width:1000px;margin:20px auto;background:#0d0d12;border:1px solid #262626;border-radius:16px;padding:24px}
+.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #1f1f28}
+.admin-header h2{color:#ff2e63;font-size:18px;letter-spacing:1px}
+.admin-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:20px}
+.admin-stat{background:#141418;border:1px solid #262626;border-radius:10px;padding:14px;text-align:center}
+.admin-stat .n{font-size:22px;font-weight:800;color:#ff2e63}
+.admin-stat .l{font-size:10px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.admin-form{background:#141418;border:1px solid #262626;border-radius:10px;padding:16px;margin-bottom:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;align-items:end}
+.admin-form label{display:block;color:#888;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.admin-form input,.admin-form select{width:100%;padding:9px 12px;background:#0a0a0f;border:1px solid #333;color:#fff;border-radius:6px;font-family:inherit;font-size:13px}
+.admin-form input:focus,.admin-form select:focus{outline:none;border-color:#ff2e63}
+.admin-form button{padding:10px 18px;border-radius:6px;cursor:pointer;font-family:inherit;font-weight:600;font-size:13px;border:none;transition:all .2s}
+.btn-gen{background:linear-gradient(135deg,#ff2e63,#ff0055);color:#fff}
+.btn-gen:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(255,46,99,.4)}
+.btn-tool{background:#1f1f28;color:#c0c0d0;border:1px solid #333}
+.btn-tool:hover{background:#2a2a35}
+.admin-search{margin-bottom:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.admin-search input{flex:1;min-width:200px;padding:10px 14px;background:#141418;border:1px solid #262626;color:#fff;border-radius:8px;font-family:inherit;font-size:13px}
+.admin-search input:focus{outline:none;border-color:#ff2e63}
+.admin-search select{padding:10px 14px;background:#141418;border:1px solid #262626;color:#fff;border-radius:8px;font-family:inherit;font-size:13px}
+.keys-table{width:100%;border-collapse:collapse;background:#141418;border-radius:10px;overflow:hidden;font-size:12px}
+.keys-table th{background:#1a1a20;color:#ff2e63;padding:10px 8px;text-align:left;font-weight:600;letter-spacing:.5px;font-size:11px;text-transform:uppercase}
+.keys-table td{padding:10px 8px;border-top:1px solid #1f1f28;color:#c0c0d0;vertical-align:middle}
+.keys-table tr:hover td{background:#181820}
+.key-code{font-family:'JetBrains Mono',monospace;color:#f39c12;cursor:pointer;font-size:11px;user-select:all}
+.key-code:hover{color:#f1c40f;text-decoration:underline}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.tag-ok{background:#0d2b1e;color:#2ecc71;border:1px solid #1a4a34}
+.tag-no{background:#2b0d0d;color:#e74c3c;border:1px solid #4a1a1a}
+.tag-warn{background:#2b210d;color:#f39c12;border:1px solid #4a3a1a}
+.tag-hwid{background:#0d1f2b;color:#3498db;border:1px solid #1a3a4a}
+.keys-table button{padding:4px 10px;border-radius:4px;cursor:pointer;font-family:inherit;font-size:11px;border:1px solid;background:transparent;transition:all .2s}
+.btn-del{color:#e74c3c;border-color:#e74c3c}
+.btn-del:hover{background:#e74c3c;color:#fff}
+.btn-hwid{color:#3498db;border-color:#3498db}
+.btn-hwid:hover{background:#3498db;color:#fff}
+.btn-ban{color:#f39c12;border-color:#f39c12}
+.btn-ban:hover{background:#f39c12;color:#fff}
+@media (max-width:600px){
+    .keys-table{font-size:10px}
+    .keys-table th,.keys-table td{padding:6px 4px}
+    .key-code{font-size:9px}
+    .admin-box{padding:14px}
+    .admin-form{grid-template-columns:1fr}
+    .admin-form button{width:100%}
+}
 </style>
 </head>
 <body>
@@ -131,6 +182,7 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:48px 24px 32px;margin-
       <a href="#ozellikler">Özellikler</a>
       <a href="#planlar">Planlar</a>
       <a href="#sss">SSS</a>
+      <button class="nav-admin" onclick="adminLogin()">🔐 Admin</button>
       <button class="nav-cta" onclick="openLogin()">Giriş Yap</button>
     </div>
     <div class="burger" onclick="toggleMenu()">
@@ -159,7 +211,7 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:48px 24px 32px;margin-
     <button class="btn btn-ghost" onclick="keyCheck()">Key Sorgula</button>
   </div>
   <div class="hero-stats">
-    <div class="stat-item"><div class="stat-num">12K+</div><div class="stat-label">Aktif Kullanıcı</div></div>
+    <div class="stat-item"><div class="stat-num" id="statLiveKeys">0</div><div class="stat-label">Aktif Key</div></div>
     <div class="stat-item"><div class="stat-num">99.9%</div><div class="stat-label">Uptime</div></div>
     <div class="stat-item"><div class="stat-num">7/24</div><div class="stat-label">Destek</div></div>
     <div class="stat-item"><div class="stat-num">&lt;30sn</div><div class="stat-label">Teslimat</div></div>
@@ -228,211 +280,4 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:48px 24px 32px;margin-
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 24 saat erişim</li>
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 1 cihaz (HWID)</li>
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Anında teslimat</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Standart destek</li>
-        </ul>
-        <button class="plan-btn" onclick="selectPlan('Günlük', 50)">SATIN AL</button>
-      </div>
-
-      <div class="plan featured">
-        <div class="plan-name">Haftalık</div>
-        <div class="plan-price">
-          <span class="currency">₺</span>
-          <span class="amount">200</span>
-          <span class="period">/ 7 gün</span>
-        </div>
-        <ul class="plan-features">
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 7 gün erişim</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 1 cihaz (HWID)</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Anında teslimat</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Öncelikli destek</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 1 HWID sıfırlama</li>
-        </ul>
-        <button class="plan-btn" onclick="selectPlan('Haftalık', 200)">SATIN AL</button>
-      </div>
-
-      <div class="plan">
-        <div class="plan-name">Aylık</div>
-        <div class="plan-price">
-          <span class="currency">₺</span>
-          <span class="amount">600</span>
-          <span class="period">/ 30 gün</span>
-        </div>
-        <ul class="plan-features">
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 30 gün erişim</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 1 cihaz (HWID)</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Anında teslimat</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> VIP destek</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 2 HWID sıfırlama</li>
-        </ul>
-        <button class="plan-btn" onclick="selectPlan('Aylık', 600)">SATIN AL</button>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section id="sss">
-  <div class="section-inner">
-    <div class="section-head">
-      <div class="section-tag">Sıkça Sorulan</div>
-      <h2 class="section-title">Aklındaki sorular</h2>
-    </div>
-    <div class="faq">
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Key'i nasıl alacağım?<span class="faq-icon">+</span></div>
-        <div class="faq-a">Planı seç, ödemeyi yap. Key otomatik olarak panelinde görünür. Ayrıca e-posta olarak da gönderilir.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">HWID nedir, neden kilitliyorsunuz?<span class="faq-icon">+</span></div>
-        <div class="faq-a">HWID cihazının benzersiz kimliğidir. Key'i tek cihaza kilitleyerek paylaşımı engelliyoruz. Başka cihazda kullanmak istersen sıfırlama hakkın var.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Key'i kaç cihazda kullanabilirim?<span class="faq-icon">+</span></div>
-        <div class="faq-a">Bir key sadece bir cihazda aktif olur. Planına göre 1-2 kez HWID sıfırlama hakkın vardır.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Ödeme yöntemleri neler?<span class="faq-icon">+</span></div>
-        <div class="faq-a">Havale/EFT, Papara, Shopier ve kripto (USDT/BTC). Sipariş sırasında seçenekleri görürsün.</div>
-      </div>
-      <div class="faq-item">
-              <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Ödeme yöntemleri neler?<span class="faq-icon">+</span></div>
-        <div class="faq-a">Havale/EFT, Papara, Shopier ve kripto (USDT/BTC). Sipariş sırasında seçenekleri görürsün.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">İade var mı?<span class="faq-icon">+</span></div>
-        <div class="faq-a">Key kullanılmadıysa 24 saat içinde iade edilir. HWID kilitlendikten sonra iade yapılamaz.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Destek nasıl alırım?<span class="faq-icon">+</span></div>
-        <div class="faq-a">Discord sunucumuz ve Telegram kanalımız üzerinden 7/24 ulaşabilirsin. Ortalama yanıt süresi 5 dakikadır.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="cta">
-    <h2>Hemen başlamaya hazır mısın?</h2>
-    <p>30 saniyede key'ini al, oyuna gir. Kredi kartı gerekmez.</p>
-    <a href="#planlar" class="btn btn-primary">PLAN SEÇ</a>
-  </div>
-</section>
-
-</main>
-
-<footer>
-  <div class="footer-inner">
-    <div class="footer-col">
-      <div class="logo" style="margin-bottom:16px">
-        <span class="logo-dot"></span>
-        BABU<span>.STORE</span>
-      </div>
-      <p style="color:#8a8a9a;font-size:13px;max-width:280px">PUBG Mobile için premium key hizmeti. Anında teslim, güvenli ödeme, 7/24 destek.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Ürün</h4>
-      <a href="#planlar">Planlar</a>
-      <a href="#ozellikler">Özellikler</a>
-      <a href="#sss">SSS</a>
-    </div>
-    <div class="footer-col">
-      <h4>Destek</h4>
-      <a href="#">Discord</a>
-      <a href="#">Telegram</a>
-      <a href="#">İletişim</a>
-    </div>
-    <div class="footer-col">
-      <h4>Yasal</h4>
-      <a href="#">Kullanım Şartları</a>
-      <a href="#">Gizlilik</a>
-      <a href="#">İade Politikası</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div>© 2026 BABU.STORE — Tüm hakları saklıdır.</div>
-    <div>Made with ❤ for the community</div>
-  </div>
-</footer>
-
-<script>
-function toggleMenu(){
-    var links = document.getElementById('navLinks');
-    if(!links) return;
-    if(links.style.display === 'flex'){
-        links.style.display = '';
-    } else {
-        links.style.display = 'flex';
-        links.style.position = 'absolute';
-        links.style.top = '100%';
-        links.style.left = '0';
-        links.style.right = '0';
-        links.style.flexDirection = 'column';
-        links.style.background = '#0d0d12';
-        links.style.padding = '20px';
-        links.style.borderBottom = '1px solid rgba(255,255,255,.06)';
-    }
-}
-
-function toggleFaq(el){
-    el.parentElement.classList.toggle('open');
-}
-
-function showToast(html, borderColor, duration){
-    var existing = document.getElementById('babuToast');
-    if(existing) existing.parentNode.removeChild(existing);
-    var toast = document.createElement('div');
-    toast.id = 'babuToast';
-    toast.className = 'key-result-toast';
-    toast.style.borderColor = borderColor;
-    toast.innerHTML = html;
-    document.body.appendChild(toast);
-    setTimeout(function(){
-        if(toast.parentNode) {
-            toast.style.opacity = '0';
-            toast.style.transition = 'opacity .3s';
-            setTimeout(function(){
-                if(toast.parentNode) toast.parentNode.removeChild(toast);
-            }, 300);
-        }
-    }, duration || 4000);
-}
-
-function selectPlan(name, price){
-    showToast(
-        '<div style="font-weight:700;margin-bottom:6px;color:#ff2e63">🛒 ' + name + ' Plan</div>' +
-        '<div style="color:#a0a0b0;font-size:13px">Fiyat: <strong style="color:#fff">₺' + price + '</strong></div>' +
-        '<div style="color:#6a6a7a;font-size:12px;margin-top:6px">Demo modu — gerçek ödeme yakında aktif.</div>',
-        '#ff2e63', 4000
-    );
-}
-
-function keyCheck(){
-    var key = prompt('Key kodunu gir:\n\nÖrnek: A1B2-C3D4-E5F6');
-    if(!key || key.trim() === '') return;
-    var upperKey = key.trim().toUpperCase();
-    if(upperKey.length < 8){
-        showToast('<span style="color:#e74c3c">✗</span> Geçersiz key formatı. En az 8 karakter olmalı.', '#e74c3c', 4000);
-        return;
-    }
-    showToast('<span style="color:#f39c12">⏳</span> Sorgulanıyor... <strong style="color:#fff">' + upperKey + '</strong>', '#f39c12', 1500);
-    setTimeout(function(){
-        showToast(
-            '<span style="color:#2ecc71">✓</span> Key aktif görünüyor.<br>' +
-            '<span style="color:#6a6a7a;font-size:12px">Demo — gerçek doğrulama için sunucu gerekli.</span>',
-            '#2ecc71', 4000
-        );
-    }, 1500);
-}
-
-function openLogin(){
-    showToast(
-        '<div style="font-weight:700;color:#ff2e63;margin-bottom:6px">🔐 Giriş Sistemi</div>' +
-        '<div style="color:#8a8a9a;font-size:13px">Yakında aktif olacak. Discord üzerinden ulaş.</div>',
-        '#ff2e63', 4000
-    );
-}
-</script>
-
-</body>
-    </html>
+          <li><svg width="18" heigh
