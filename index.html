@@ -6,189 +6,74 @@
 <title>AZRAIL PANEL</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{
-    font-family:system-ui,sans-serif;
-    background:#08080c;color:#e8e8ec;
-    min-height:100vh;
-}
-body::before{
-    content:'';position:fixed;inset:0;
-    background:radial-gradient(circle at 50% 30%,rgba(255,46,99,.12),transparent 60%);
-    pointer-events:none;
-}
+body{font-family:system-ui,sans-serif;background:#08080c;color:#e8e8ec;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 50% 30%,rgba(255,46,99,.12),transparent 60%);pointer-events:none}
+
 /* GİRİŞ */
-.login-wrap{
-    position:relative;z-index:2;
-    display:flex;align-items:center;justify-content:center;
-    min-height:100vh;padding:20px;
-}
-.login-box{
-    background:#111;border:1px solid #222;
-    border-radius:16px;padding:40px 32px;
-    width:100%;max-width:380px;
-    box-shadow:0 20px 60px rgba(255,46,99,.15);
-}
-.login-box h1{
-    text-align:center;font-size:22px;
-    color:#ff2e63;letter-spacing:4px;
-    margin-bottom:8px;font-weight:800;
-}
-.login-box p{
-    text-align:center;color:#666;
-    font-size:12px;margin-bottom:32px;
-    letter-spacing:2px;text-transform:uppercase;
-}
-.login-box input{
-    width:100%;padding:14px 16px;
-    background:#0a0a0f;border:1px solid #333;
-    color:#fff;border-radius:8px;
-    font-family:inherit;font-size:14px;
-    margin-bottom:16px;letter-spacing:1px;
-}
-.login-box input:focus{
-    outline:none;border-color:#ff2e63;
-    box-shadow:0 0 0 3px rgba(255,46,99,.1);
-}
-.login-box button{
-    width:100%;padding:14px;
-    background:linear-gradient(135deg,#ff2e63,#ff0055);
-    color:#fff;border:none;border-radius:8px;
-    font-family:inherit;font-weight:700;
-    font-size:14px;letter-spacing:2px;
-    cursor:pointer;transition:all .2s;
-}
+.login-wrap{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.login-box{background:#111;border:1px solid #222;border-radius:16px;padding:40px 32px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(255,46,99,.15)}
+.login-box h1{text-align:center;font-size:22px;color:#ff2e63;letter-spacing:4px;margin-bottom:8px;font-weight:800}
+.login-box p{text-align:center;color:#666;font-size:12px;margin-bottom:32px;letter-spacing:2px;text-transform:uppercase}
+.login-box input{width:100%;padding:14px 16px;background:#0a0a0f;border:1px solid #333;color:#fff;border-radius:8px;font-family:inherit;font-size:14px;margin-bottom:16px;letter-spacing:1px}
+.login-box input:focus{outline:none;border-color:#ff2e63;box-shadow:0 0 0 3px rgba(255,46,99,.1)}
+.login-box button{width:100%;padding:14px;background:linear-gradient(135deg,#ff2e63,#ff0055);color:#fff;border:none;border-radius:8px;font-family:inherit;font-weight:700;font-size:14px;letter-spacing:2px;cursor:pointer;transition:all .2s}
 .login-box button:hover{transform:translateY(-1px)}
-.err{
-    color:#e74c3c;font-size:12px;
-    text-align:center;margin-top:12px;
-}
+.err{color:#e74c3c;font-size:12px;text-align:center;margin-top:12px}
+
 /* PANEL */
-.panel{
-    display:none;position:relative;z-index:2;
-    max-width:1200px;margin:0 auto;
-    padding:30px 20px;
-}
+.panel{display:none;position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:30px 20px}
 .panel.open{display:block}
-.header{
-    display:flex;justify-content:space-between;
-    align-items:center;margin-bottom:24px;
-    padding-bottom:16px;
-    border-bottom:1px solid #222;
-}
-.header h1{
-    color:#ff2e63;font-size:18px;
-    letter-spacing:3px;font-weight:800;
-}
-.header button{
-    padding:8px 16px;background:transparent;
-    color:#888;border:1px solid #333;
-    border-radius:6px;cursor:pointer;
-    font-family:inherit;font-size:12px;
-}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid #222}
+.header h1{color:#ff2e63;font-size:18px;letter-spacing:3px;font-weight:800}
+.header button{padding:8px 16px;background:transparent;color:#888;border:1px solid #333;border-radius:6px;cursor:pointer;font-family:inherit;font-size:12px}
 .header button:hover{color:#e74c3c;border-color:#e74c3c}
+
 /* İSTATİSTİK */
-.stats{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(110px,1fr));
-    gap:10px;margin-bottom:20px;
-}
-.stat{
-    background:#111;border:1px solid #222;
-    border-radius:10px;padding:14px;
-    text-align:center;
-}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:20px}
+.stat{background:#111;border:1px solid #222;border-radius:10px;padding:14px;text-align:center}
 .stat .n{font-size:22px;font-weight:800;color:#ff2e63}
-.stat .l{font-size:10px;color:#666;text-transform:uppercase;
-         letter-spacing:1px;margin-top:4px}
+.stat .l{font-size:10px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+
 /* FORM */
-.form{
-    background:#111;border:1px solid #222;
-    border-radius:10px;padding:16px;
-    margin-bottom:16px;
-    display:grid;grid-template-columns:1fr 1fr;gap:10px;
-}
-.form label{
-    display:block;color:#888;font-size:11px;
-    text-transform:uppercase;letter-spacing:1px;
-    margin-bottom:6px;
-}
-.form input{
-    width:100%;padding:10px 12px;
-    background:#0a0a0f;border:1px solid #333;
-    color:#fff;border-radius:6px;
-    font-family:inherit;font-size:13px;
-}
+.form{background:#111;border:1px solid #222;border-radius:10px;padding:16px;margin-bottom:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form.special{border-color:#f39c12;background:linear-gradient(180deg,rgba(243,156,18,.05),#111)}
+.form label{display:block;color:#888;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.form.special label{color:#f39c12}
+.form input{width:100%;padding:10px 12px;background:#0a0a0f;border:1px solid #333;color:#fff;border-radius:6px;font-family:inherit;font-size:13px}
+.form.special input{border-color:#4a3a1a}
 .form input:focus{outline:none;border-color:#ff2e63}
-.form button{
-    grid-column:1/-1;padding:12px;
-    background:linear-gradient(135deg,#ff2e63,#ff0055);
-    color:#fff;border:none;border-radius:8px;
-    cursor:pointer;font-family:inherit;
-    font-weight:700;font-size:13px;
-    letter-spacing:1px;
-}
+.form.special input:focus{border-color:#f39c12}
+.form button{grid-column:1/-1;padding:12px;background:linear-gradient(135deg,#ff2e63,#ff0055);color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:700;font-size:13px;letter-spacing:1px}
+.form.special button{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.form button:hover{transform:translateY(-1px)}
+
 /* TOOLS */
-.tools{
-    display:flex;gap:10px;flex-wrap:wrap;
-    margin-bottom:16px;
-}
-.tools button{
-    flex:1;min-width:130px;padding:10px;
-    background:#1a1a20;border:1px solid #333;
-    color:#c0c0d0;border-radius:6px;
-    cursor:pointer;font-family:inherit;
-    font-size:12px;font-weight:600;
-}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.tools button{flex:1;min-width:130px;padding:10px;background:#1a1a20;border:1px solid #333;color:#c0c0d0;border-radius:6px;cursor:pointer;font-family:inherit;font-size:12px;font-weight:600}
 .tools button:hover{border-color:#ff2e63;color:#ff2e63}
+
 /* TABLO */
-table{
-    width:100%;border-collapse:collapse;
-    background:#111;border-radius:10px;
-    overflow:hidden;font-size:12px;
-}
-th{
-    background:#1a1a20;color:#ff2e63;
-    padding:10px 8px;text-align:left;
-    font-size:10px;text-transform:uppercase;
-    letter-spacing:1px;
-}
+table{width:100%;border-collapse:collapse;background:#111;border-radius:10px;overflow:hidden;font-size:12px}
+th{background:#1a1a20;color:#ff2e63;padding:10px 8px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:1px}
 td{padding:10px 8px;border-top:1px solid #1a1a1a;color:#c0c0d0}
 tr:hover td{background:#151515}
-.key-code{
-    font-family:monospace;color:#f39c12;
-    cursor:pointer;font-size:11px;
-}
+.key-code{font-family:monospace;color:#f39c12;cursor:pointer;font-size:11px}
 .key-code:hover{color:#ff2e63;text-decoration:underline}
-.tag{
-    padding:2px 8px;border-radius:4px;
-    font-size:10px;font-weight:600;
-}
+.tag{padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600}
 .t-ok{background:#0d2b1e;color:#2ecc71}
 .t-no{background:#2b0d0d;color:#e74c3c}
 .t-w{background:#2b210d;color:#f39c12}
 .t-lock{background:#0d1f2b;color:#3498db}
-td button{
-    padding:4px 8px;border-radius:4px;
-    font-family:inherit;font-size:11px;
-    cursor:pointer;background:transparent;
-    border:1px solid #333;color:#888;
-    margin-right:4px;
-}
+.t-vip{background:#2b210d;color:#f39c12;border:1px solid #f39c12}
+td button{padding:4px 8px;border-radius:4px;font-family:inherit;font-size:11px;cursor:pointer;background:transparent;border:1px solid #333;color:#888;margin-right:4px}
 td button:hover{border-color:#ff2e63;color:#ff2e63}
 .empty{text-align:center;padding:30px;color:#666}
-.toast{
-    position:fixed;bottom:20px;left:50%;
-    transform:translateX(-50%);
-    background:#141418;border:1px solid #2a2a35;
-    border-radius:10px;padding:14px 22px;
-    color:#fff;z-index:9999;font-size:13px;
-    box-shadow:0 12px 40px rgba(0,0,0,.6);
-}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#141418;border:1px solid #2a2a35;border-radius:10px;padding:14px 22px;color:#fff;z-index:9999;font-size:13px;box-shadow:0 12px 40px rgba(0,0,0,.6)}
 </style>
 </head>
 <body>
 
-<!-- GİRİŞ EKRANI -->
+<!-- GİRİŞ -->
 <div class="login-wrap" id="loginWrap">
     <div class="login-box">
         <h1>AZRAIL PANEL</h1>
@@ -208,6 +93,7 @@ td button:hover{border-color:#ff2e63;color:#ff2e63}
 
     <div class="stats" id="stats"></div>
 
+    <!-- RASTGELE ÜRETİM -->
     <div class="form">
         <div>
             <label>Süre (gün)</label>
@@ -217,7 +103,20 @@ td button:hover{border-color:#ff2e63;color:#ff2e63}
             <label>Adet</label>
             <input id="keyCount" type="number" value="1" min="1" max="50">
         </div>
-        <button onclick="generateKeys()">YENİ KEY ÜRET</button>
+        <button onclick="generateKeys()">🎲 RASTGELE KEY ÜRET</button>
+    </div>
+
+    <!-- ÖZEL ÜRETİM -->
+    <div class="form special">
+        <div>
+            <label>⭐ Özel Key Kodu (kendi yaz)</label>
+            <input id="customKey" placeholder="ORNEK-VIP-2026">
+        </div>
+        <div>
+            <label>⭐ Özel Süre (gün)</label>
+            <input id="customDays" type="number" value="365" min="1">
+        </div>
+        <button onclick="generateCustomKey()">⭐ ÖZEL KEY ÜRET</button>
     </div>
 
     <div class="tools">
@@ -230,7 +129,6 @@ td button:hover{border-color:#ff2e63;color:#ff2e63}
 </div>
 
 <script>
-// ============ AYARLAR ============
 var ADMIN_PASS = 'emirbaba01';
 var JSONBIN_KEY = '$2a$10$aylfWvcqSLY25nwWrDUJKuqVBq1vm/9L2IPse7yIyblAFQKsDMIoy';
 var JSONBIN_BIN = '6aca79faffd5d160535f9c47';
@@ -250,10 +148,7 @@ function tryLogin(){
 document.getElementById('passInput').addEventListener('keydown', function(e){
     if(e.key === 'Enter') tryLogin();
 });
-
-function logout(){
-    location.reload();
-}
+function logout(){ location.reload(); }
 
 // ============ TOAST ============
 function toast(msg, color){
@@ -279,7 +174,6 @@ async function loadKeys(){
         return (data.record && data.record.keys) || [];
     } catch(e) { return []; }
 }
-
 async function saveKeys(keys){
     try {
         var res = await fetch(JSONBIN_URL, {
@@ -294,7 +188,7 @@ async function saveKeys(keys){
     } catch(e) { return false; }
 }
 
-// ============ KEY ÜRET ============
+// ============ RASTGELE ÜRETİM ============
 function genKey(){
     var c = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', parts = [];
     for(var p = 0; p < 4; p++){
@@ -304,7 +198,6 @@ function genKey(){
     }
     return parts.join('-');
 }
-
 async function generateKeys(){
     var days = parseInt(document.getElementById('keyDays').value) || 30;
     var cnt = Math.min(50, parseInt(document.getElementById('keyCount').value) || 1);
@@ -312,19 +205,42 @@ async function generateKeys(){
     var now = Math.floor(Date.now() / 1000);
     for(var i = 0; i < cnt; i++){
         keys.push({
-            key: genKey(),
-            days: days,
-            created: now,
-            expires: now + days * 86400,
-            hwid: null,
-            banned: false,
-            usage_count: 0,
-            last_used: 0
+            key: genKey(), days: days, created: now,
+            expires: now + days * 86400, hwid: null,
+            banned: false, usage_count: 0, last_used: 0
         });
     }
     var ok = await saveKeys(keys);
     if(ok){ renderKeys(); toast('✓ ' + cnt + ' key üretildi.'); }
     else { toast('✗ Kaydedilemedi!', '#e74c3c'); }
+}
+
+// ============ ÖZEL ÜRETİM ============
+async function generateCustomKey(){
+    var customKey = document.getElementById('customKey').value.trim().toUpperCase();
+    var days = parseInt(document.getElementById('customDays').value) || 365;
+
+    if(customKey.length < 4){ toast('✗ En az 4 karakter.', '#e74c3c'); return; }
+    if(!/^[A-Z0-9\-]+$/.test(customKey)){ toast('✗ Sadece A-Z, 0-9 ve -', '#e74c3c'); return; }
+
+    var keys = await loadKeys();
+    for(var i = 0; i < keys.length; i++){
+        if(keys[i].key === customKey){ toast('✗ Bu key zaten var.', '#e74c3c'); return; }
+    }
+
+    var now = Math.floor(Date.now() / 1000);
+    keys.push({
+        key: customKey, days: days, created: now,
+        expires: now + days * 86400, hwid: null,
+        banned: false, usage_count: 0, last_used: 0
+    });
+
+    var ok = await saveKeys(keys);
+    if(ok){
+        renderKeys();
+        document.getElementById('customKey').value = '';
+        toast('⭐ Özel key oluşturuldu: ' + customKey, '#f39c12');
+    } else { toast('✗ Kaydedilemedi!', '#e74c3c'); }
 }
 
 // ============ LİSTELE ============
@@ -345,10 +261,8 @@ async function renderKeys(){
         '<div class="stat"><div class="n" style="color:#e74c3c">' + banli + '</div><div class="l">Banlı</div></div>';
 
     var list = document.getElementById('keysList');
-    if(keys.length === 0){
-        list.innerHTML = '<div class="empty">Henüz key yok.</div>';
-        return;
-    }
+    if(keys.length === 0){ list.innerHTML = '<div class="empty">Henüz key yok.</div>'; return; }
+
     var h = '<div style="overflow-x:auto"><table>';
     h += '<tr><th>Key</th><th>Süre</th><th>Kullanım</th><th>HWID</th><th>Son Giriş</th><th>Durum</th><th>İşlem</th></tr>';
     keys.forEach(function(k, i){
@@ -357,13 +271,16 @@ async function renderKeys(){
         var st = k.banned ? '<span class="tag t-no">BAN</span>'
                : (left < 0 ? '<span class="tag t-w">DOLDU</span>' : '<span class="tag t-ok">' + dl + 'g</span>');
         var hwidShort = k.hwid ? k.hwid.substring(0, 10) + '…' : '—';
-        var hwidTxt = k.hwid ? '<span class="tag t-lock">KİLİTLİ</span>' : '—';
+        var hwidTxt = k.hwid ? ' <span class="tag t-lock">KİLİTLİ</span>' : '';
         var lastUsed = k.last_used ? new Date(k.last_used * 1000).toLocaleString('tr-TR') : '—';
+        var isSpecial = !/^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(k.key);
+
         h += '<tr>';
-        h += '<td><span class="key-code" onclick="copyKey(\'' + k.key + '\')">' + k.key + '</span></td>';
+        h += '<td><span class="key-code" onclick="copyKey(\'' + k.key + '\')">' + k.key + '</span>' +
+             (isSpecial ? ' <span class="tag t-vip">⭐ ÖZEL</span>' : '') + '</td>';
         h += '<td>' + k.days + 'g</td>';
         h += '<td style="color:#3498db">' + (k.usage_count || 0) + '</td>';
-        h += '<td style="font-size:11px">' + (k.hwid ? hwidShort + ' ' + hwidTxt : '—') + '</td>';
+        h += '<td style="font-size:11px">' + (k.hwid ? hwidShort + hwidTxt : '—') + '</td>';
         h += '<td style="font-size:11px;color:#666">' + lastUsed + '</td>';
         h += '<td>' + st + '</td>';
         h += '<td style="white-space:nowrap">';
@@ -380,46 +297,27 @@ async function renderKeys(){
 // ============ İŞLEMLER ============
 async function delKey(i){
     if(!confirm('Silinsin mi?')) return;
-    var keys = await loadKeys();
-    keys.splice(i, 1);
-    await saveKeys(keys);
-    renderKeys();
-    toast('✓ Silindi.');
+    var keys = await loadKeys(); keys.splice(i, 1);
+    await saveKeys(keys); renderKeys(); toast('✓ Silindi.');
 }
-
 async function resetHWID(i){
-    if(!confirm('HWID sıfırlansın mı? Yeni cihaz bağlanabilir.')) return;
-    var keys = await loadKeys();
-    keys[i].hwid = null;
-    await saveKeys(keys);
-    renderKeys();
-    toast('✓ HWID sıfırlandı.');
+    if(!confirm('HWID sıfırlansın mı?')) return;
+    var keys = await loadKeys(); keys[i].hwid = null;
+    await saveKeys(keys); renderKeys(); toast('✓ HWID sıfırlandı.');
 }
-
 async function banKey(i){
     if(!confirm('Banlansın mı?')) return;
-    var keys = await loadKeys();
-    keys[i].banned = true;
-    await saveKeys(keys);
-    renderKeys();
-    toast('✓ Banlandı.');
+    var keys = await loadKeys(); keys[i].banned = true;
+    await saveKeys(keys); renderKeys(); toast('✓ Banlandı.');
 }
-
 async function unbanKey(i){
-    var keys = await loadKeys();
-    keys[i].banned = false;
-    await saveKeys(keys);
-    renderKeys();
-    toast('✓ Ban kaldırıldı.');
+    var keys = await loadKeys(); keys[i].banned = false;
+    await saveKeys(keys); renderKeys(); toast('✓ Ban kaldırıldı.');
 }
-
 async function clearAll(){
     if(!confirm('TÜM keyler silinecek. Emin misin?')) return;
-    await saveKeys([]);
-    renderKeys();
-    toast('✓ Tümü silindi.');
+    await saveKeys([]); renderKeys(); toast('✓ Tümü silindi.');
 }
-
 function copyKey(k){
     if(navigator.clipboard){ navigator.clipboard.writeText(k); }
     else {
@@ -429,7 +327,6 @@ function copyKey(k){
     }
     toast('✓ Kopyalandı: ' + k);
 }
-
 function exportCSV(){
     loadKeys().then(function(keys){
         if(keys.length === 0){ toast('Key yok.', '#e74c3c'); return; }
