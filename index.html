@@ -35,7 +35,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle
 .stat .l{font-size:10px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
 
 /* FORM */
-.form{background:#111;border:1px solid #222;border-radius:10px;padding:16px;margin-bottom:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form{background:#111;border:1px solid #222;border-radius:10px;padding:16px;margin-bottom:16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
 .form.special{border-color:#f39c12;background:linear-gradient(180deg,rgba(243,156,18,.05),#111)}
 .form label{display:block;color:#888;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
 .form.special label{color:#f39c12}
@@ -46,6 +46,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle
 .form button{grid-column:1/-1;padding:12px;background:linear-gradient(135deg,#ff2e63,#ff0055);color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:700;font-size:13px;letter-spacing:1px}
 .form.special button{background:linear-gradient(135deg,#f39c12,#e67e22)}
 .form button:hover{transform:translateY(-1px)}
+.hint{grid-column:1/-1;font-size:11px;color:#666;text-align:center;margin-top:-2px}
 
 /* TOOLS */
 .tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
@@ -59,16 +60,20 @@ td{padding:10px 8px;border-top:1px solid #1a1a1a;color:#c0c0d0}
 tr:hover td{background:#151515}
 .key-code{font-family:monospace;color:#f39c12;cursor:pointer;font-size:11px}
 .key-code:hover{color:#ff2e63;text-decoration:underline}
-.tag{padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600}
+.tag{padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;display:inline-block}
 .t-ok{background:#0d2b1e;color:#2ecc71}
 .t-no{background:#2b0d0d;color:#e74c3c}
 .t-w{background:#2b210d;color:#f39c12}
 .t-lock{background:#0d1f2b;color:#3498db}
 .t-vip{background:#2b210d;color:#f39c12;border:1px solid #f39c12}
-td button{padding:4px 8px;border-radius:4px;font-family:inherit;font-size:11px;cursor:pointer;background:transparent;border:1px solid #333;color:#888;margin-right:4px}
+.t-dev{background:#1a0d2b;color:#a855f7}
+td button{padding:4px 8px;border-radius:4px;font-family:inherit;font-size:11px;cursor:pointer;background:transparent;border:1px solid #333;color:#888;margin-right:4px;margin-bottom:2px}
 td button:hover{border-color:#ff2e63;color:#ff2e63}
 .empty{text-align:center;padding:30px;color:#666}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#141418;border:1px solid #2a2a35;border-radius:10px;padding:14px 22px;color:#fff;z-index:9999;font-size:13px;box-shadow:0 12px 40px rgba(0,0,0,.6)}
+.hwid-list{font-size:10px;color:#888;font-family:monospace;line-height:1.5}
+.hwid-list div{display:flex;justify-content:space-between;gap:8px}
+.hwid-list button{padding:1px 5px;font-size:9px;margin:0}
 </style>
 </head>
 <body>
@@ -103,18 +108,27 @@ td button:hover{border-color:#ff2e63;color:#ff2e63}
             <label>Adet</label>
             <input id="keyCount" type="number" value="1" min="1" max="50">
         </div>
+        <div>
+            <label>Cihaz Sınırı</label>
+            <input id="keyDevices" type="number" value="1" min="1" max="20">
+        </div>
         <button onclick="generateKeys()">🎲 RASTGELE KEY ÜRET</button>
+        <div class="hint">Cihaz Sınırı: bu key'in kaç farklı bilgisayarda kullanılabileceği (1 = tek cihaz)</div>
     </div>
 
     <!-- ÖZEL ÜRETİM -->
     <div class="form special">
         <div>
-            <label>⭐ Özel Key Kodu (kendi yaz)</label>
+            <label>⭐ Özel Key Kodu</label>
             <input id="customKey" placeholder="ORNEK-VIP-2026">
         </div>
         <div>
             <label>⭐ Özel Süre (gün)</label>
             <input id="customDays" type="number" value="365" min="1">
+        </div>
+        <div>
+            <label>⭐ Cihaz Sınırı</label>
+            <input id="customDevices" type="number" value="1" min="1" max="20">
         </div>
         <button onclick="generateCustomKey()">⭐ ÖZEL KEY ÜRET</button>
     </div>
@@ -164,6 +178,23 @@ function toast(msg, color){
     }, 3500);
 }
 
+// ============ NORMALİZASYON (geriye dönük uyum) ============
+// Eski format: hwid: "abc"  →  Yeni format: hwids: ["abc"]
+function normalizeKey(k){
+    if(!k.hwids){
+        k.hwids = [];
+        if(k.hwid && k.hwid !== '') k.hwids.push(k.hwid);
+    }
+    // eski hwid alanını temizle, karışıklık olmasın
+    if('hwid' in k) delete k.hwid;
+    if(typeof k.device_limit !== 'number' || k.device_limit < 1){
+        k.device_limit = 1;
+    }
+    if(!k.usage_count) k.usage_count = 0;
+    if(!k.last_used) k.last_used = 0;
+    return k;
+}
+
 // ============ JSONBIN ============
 async function loadKeys(){
     try {
@@ -171,7 +202,8 @@ async function loadKeys(){
             headers: { 'X-Master-Key': JSONBIN_KEY }
         });
         var data = await res.json();
-        return (data.record && data.record.keys) || [];
+        var keys = (data.record && data.record.keys) || [];
+        return keys.map(normalizeKey);
     } catch(e) { return []; }
 }
 async function saveKeys(keys){
@@ -188,7 +220,7 @@ async function saveKeys(keys){
     } catch(e) { return false; }
 }
 
-// ============ RASTGELE ÜRETİM ============
+// ============ ÜRETİM ============
 function genKey(){
     var c = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', parts = [];
     for(var p = 0; p < 4; p++){
@@ -198,27 +230,36 @@ function genKey(){
     }
     return parts.join('-');
 }
+
 async function generateKeys(){
     var days = parseInt(document.getElementById('keyDays').value) || 30;
     var cnt = Math.min(50, parseInt(document.getElementById('keyCount').value) || 1);
+    var devLimit = Math.max(1, Math.min(20, parseInt(document.getElementById('keyDevices').value) || 1));
+
     var keys = await loadKeys();
     var now = Math.floor(Date.now() / 1000);
     for(var i = 0; i < cnt; i++){
         keys.push({
-            key: genKey(), days: days, created: now,
-            expires: now + days * 86400, hwid: null,
-            banned: false, usage_count: 0, last_used: 0
+            key: genKey(),
+            days: days,
+            created: now,
+            expires: now + days * 86400,
+            hwids: [],
+            device_limit: devLimit,
+            banned: false,
+            usage_count: 0,
+            last_used: 0
         });
     }
     var ok = await saveKeys(keys);
-    if(ok){ renderKeys(); toast('✓ ' + cnt + ' key üretildi.'); }
+    if(ok){ renderKeys(); toast('✓ ' + cnt + ' key üretildi (cihaz sınırı: ' + devLimit + ')'); }
     else { toast('✗ Kaydedilemedi!', '#e74c3c'); }
 }
 
-// ============ ÖZEL ÜRETİM ============
 async function generateCustomKey(){
     var customKey = document.getElementById('customKey').value.trim().toUpperCase();
     var days = parseInt(document.getElementById('customDays').value) || 365;
+    var devLimit = Math.max(1, Math.min(20, parseInt(document.getElementById('customDevices').value) || 1));
 
     if(customKey.length < 4){ toast('✗ En az 4 karakter.', '#e74c3c'); return; }
     if(!/^[A-Z0-9\-]+$/.test(customKey)){ toast('✗ Sadece A-Z, 0-9 ve -', '#e74c3c'); return; }
@@ -230,16 +271,22 @@ async function generateCustomKey(){
 
     var now = Math.floor(Date.now() / 1000);
     keys.push({
-        key: customKey, days: days, created: now,
-        expires: now + days * 86400, hwid: null,
-        banned: false, usage_count: 0, last_used: 0
+        key: customKey,
+        days: days,
+        created: now,
+        expires: now + days * 86400,
+        hwids: [],
+        device_limit: devLimit,
+        banned: false,
+        usage_count: 0,
+        last_used: 0
     });
 
     var ok = await saveKeys(keys);
     if(ok){
         renderKeys();
         document.getElementById('customKey').value = '';
-        toast('⭐ Özel key oluşturuldu: ' + customKey, '#f39c12');
+        toast('⭐ Özel key: ' + customKey + ' (cihaz: ' + devLimit + ')', '#f39c12');
     } else { toast('✗ Kaydedilemedi!', '#e74c3c'); }
 }
 
@@ -251,12 +298,15 @@ async function renderKeys(){
     keys.forEach(function(k){
         if(k.banned) banli++;
         else if(k.expires < now) suresi++;
-        else { aktif++; if(k.hwid) kilitli++; }
+        else {
+            aktif++;
+            if(k.hwids.length >= k.device_limit) kilitli++;
+        }
     });
     document.getElementById('stats').innerHTML =
         '<div class="stat"><div class="n">' + keys.length + '</div><div class="l">Toplam</div></div>' +
         '<div class="stat"><div class="n" style="color:#2ecc71">' + aktif + '</div><div class="l">Aktif</div></div>' +
-        '<div class="stat"><div class="n" style="color:#3498db">' + kilitli + '</div><div class="l">HWID Kilitli</div></div>' +
+        '<div class="stat"><div class="n" style="color:#3498db">' + kilitli + '</div><div class="l">Cihaz Dolu</div></div>' +
         '<div class="stat"><div class="n" style="color:#f39c12">' + suresi + '</div><div class="l">Süresi Dolmuş</div></div>' +
         '<div class="stat"><div class="n" style="color:#e74c3c">' + banli + '</div><div class="l">Banlı</div></div>';
 
@@ -264,28 +314,41 @@ async function renderKeys(){
     if(keys.length === 0){ list.innerHTML = '<div class="empty">Henüz key yok.</div>'; return; }
 
     var h = '<div style="overflow-x:auto"><table>';
-    h += '<tr><th>Key</th><th>Süre</th><th>Kullanım</th><th>HWID</th><th>Son Giriş</th><th>Durum</th><th>İşlem</th></tr>';
+    h += '<tr><th>Key</th><th>Süre</th><th>Cihaz</th><th>Kullanım</th><th>HWID Listesi</th><th>Son Giriş</th><th>Durum</th><th>İşlem</th></tr>';
     keys.forEach(function(k, i){
         var left = k.expires - now;
         var dl = Math.floor(left / 86400);
         var st = k.banned ? '<span class="tag t-no">BAN</span>'
                : (left < 0 ? '<span class="tag t-w">DOLDU</span>' : '<span class="tag t-ok">' + dl + 'g</span>');
-        var hwidShort = k.hwid ? k.hwid.substring(0, 10) + '…' : '—';
-        var hwidTxt = k.hwid ? ' <span class="tag t-lock">KİLİTLİ</span>' : '';
+        var devCount = k.hwids.length;
+        var devFull = devCount >= k.device_limit;
+        var devTag = '<span class="tag ' + (devFull ? 't-dev' : 't-lock') + '">' + devCount + '/' + k.device_limit + '</span>';
         var lastUsed = k.last_used ? new Date(k.last_used * 1000).toLocaleString('tr-TR') : '—';
         var isSpecial = !/^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(k.key);
 
+        // HWID listesi
+        var hwidHtml = '—';
+        if(k.hwids.length > 0){
+            hwidHtml = '<div class="hwid-list">';
+            k.hwids.forEach(function(hw, hi){
+                hwidHtml += '<div><span>' + hw.substring(0, 12) + '…</span>' +
+                            '<button onclick="removeHWID(' + i + ',' + hi + ')">×</button></div>';
+            });
+            hwidHtml += '</div>';
+        }
+
         h += '<tr>';
         h += '<td><span class="key-code" onclick="copyKey(\'' + k.key + '\')">' + k.key + '</span>' +
-             (isSpecial ? ' <span class="tag t-vip">⭐ ÖZEL</span>' : '') + '</td>';
+             (isSpecial ? ' <span class="tag t-vip">⭐</span>' : '') + '</td>';
         h += '<td>' + k.days + 'g</td>';
-        h += '<td style="color:#3498db">' + (k.usage_count || 0) + '</td>';
-        h += '<td style="font-size:11px">' + (k.hwid ? hwidShort + hwidTxt : '—') + '</td>';
+        h += '<td>' + devTag + '</td>';
+        h += '<td style="color:#3498db">' + k.usage_count + '</td>';
+        h += '<td>' + hwidHtml + '</td>';
         h += '<td style="font-size:11px;color:#666">' + lastUsed + '</td>';
         h += '<td>' + st + '</td>';
         h += '<td style="white-space:nowrap">';
         h += '<button onclick="delKey(' + i + ')">Sil</button>';
-        if(k.hwid) h += '<button onclick="resetHWID(' + i + ')">HWID Sıfırla</button>';
+        if(k.hwids.length > 0) h += '<button onclick="resetAllHWID(' + i + ')">Cihazları Sıfırla</button>';
         if(!k.banned) h += '<button onclick="banKey(' + i + ')">Ban</button>';
         else h += '<button onclick="unbanKey(' + i + ')">Unban</button>';
         h += '</td></tr>';
@@ -300,10 +363,16 @@ async function delKey(i){
     var keys = await loadKeys(); keys.splice(i, 1);
     await saveKeys(keys); renderKeys(); toast('✓ Silindi.');
 }
-async function resetHWID(i){
-    if(!confirm('HWID sıfırlansın mı?')) return;
-    var keys = await loadKeys(); keys[i].hwid = null;
-    await saveKeys(keys); renderKeys(); toast('✓ HWID sıfırlandı.');
+async function resetAllHWID(i){
+    if(!confirm('Tüm cihaz kayıtları silinsin mi?')) return;
+    var keys = await loadKeys(); keys[i].hwids = [];
+    await saveKeys(keys); renderKeys(); toast('✓ Tüm cihazlar sıfırlandı.');
+}
+async function removeHWID(i, hi){
+    if(!confirm('Bu cihaz kaldırılsın mı?')) return;
+    var keys = await loadKeys();
+    keys[i].hwids.splice(hi, 1);
+    await saveKeys(keys); renderKeys(); toast('✓ Cihaz kaldırıldı.');
 }
 async function banKey(i){
     if(!confirm('Banlansın mı?')) return;
@@ -330,14 +399,24 @@ function copyKey(k){
 function exportCSV(){
     loadKeys().then(function(keys){
         if(keys.length === 0){ toast('Key yok.', '#e74c3c'); return; }
-        var csv = 'key,days,expires,hwid,banned,usage_count,last_used\n';
+        var csv = 'key,days,device_limit,device_count,expires,hwids,banned,usage_count,last_used\n';
         keys.forEach(function(k){
-            csv += [k.key, k.days, k.expires, k.hwid||'', k.banned?1:0, k.usage_count||0, k.last_used||0].join(',') + '\n';
+            csv += [
+                k.key,
+                k.days,
+                k.device_limit,
+                k.hwids.length,
+                k.expires,
+                '"' + k.hwids.join('|') + '"',
+                k.banned?1:0,
+                k.usage_count,
+                k.last_used
+            ].join(',') + '\n';
         });
         var blob = new Blob([csv], {type:'text/csv'});
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');
-        a.href = url; a.download = 'keys.csv'; a.click();
+        a.href = url; a.download = 'azrail_keys.csv'; a.click();
         URL.revokeObjectURL(url);
         toast('✓ CSV indirildi.');
     });
