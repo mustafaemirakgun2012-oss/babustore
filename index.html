@@ -3,169 +3,273 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AZRAIL MOD</title>
+<title>AZRAIL PANEL</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:system-ui,sans-serif;background:#08080c;color:#e8e8ec;line-height:1.6;min-height:100vh}
-header{background:rgba(8,8,12,.9);border-bottom:1px solid #222;padding:16px 24px;position:sticky;top:0;z-index:100}
-nav{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.logo{color:#ff2e63;font-weight:800;font-size:20px;font-family:monospace}
-nav button,nav a{padding:8px 16px;border-radius:8px;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:13px;text-decoration:none;display:inline-block}
-.btn-tg{background:transparent;color:#29b6f6;border:1px solid #29b6f6}
-.btn-tg:hover{background:rgba(41,182,246,.1)}
-.btn-admin{background:transparent;color:#f39c12;border:1px solid #f39c12}
-.btn-admin:hover{background:rgba(243,156,18,.1)}
-.hero{max-width:1200px;margin:0 auto;padding:80px 24px;text-align:center}
-h1{font-size:clamp(36px,6vw,64px);font-weight:900;letter-spacing:-2px;margin-bottom:20px}
-.grad{background:linear-gradient(135deg,#ff2e63,#8b2eff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero p{font-size:18px;color:#8a8a9a;max-width:600px;margin:0 auto 32px}
-.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.btn{padding:14px 28px;border-radius:10px;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:15px;transition:all .2s;text-decoration:none;display:inline-block}
-.btn-p{background:linear-gradient(135deg,#ff2e63,#ff0055);color:#fff;box-shadow:0 8px 24px rgba(255,46,99,.3)}
-.btn-p:hover{transform:translateY(-2px)}
-.btn-g{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.1)}
-.btn-g:hover{background:rgba(255,255,255,.1)}
-section{padding:60px 24px;max-width:1200px;margin:0 auto}
-h2{font-size:32px;font-weight:800;text-align:center;margin-bottom:40px;color:#ff2e63}
-.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
-.plan{background:#111;border:1px solid #222;border-radius:16px;padding:28px;text-align:center}
-.plan.featured{border-color:#ff2e63;background:linear-gradient(180deg,rgba(255,46,99,.08),#111)}
-.plan-name{font-size:13px;color:#888;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
-.plan-price{font-size:44px;font-weight:900;color:#fff;margin-bottom:20px}
-.plan-price small{font-size:16px;color:#666}
-.plan button{width:100%;padding:12px;background:#ff2e63;color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:700;font-size:14px}
-.plan button:hover{background:#ff0055}
-footer{border-top:1px solid #222;padding:32px 24px;text-align:center;color:#666;font-size:13px;margin-top:60px}
-footer a{color:#29b6f6;text-decoration:none}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#141418;border:1px solid #2a2a35;border-radius:10px;padding:14px 22px;color:#fff;z-index:99999;font-size:14px;box-shadow:0 12px 40px rgba(0,0,0,.6);max-width:90vw;animation:tin .3s ease}
-@keyframes tin{from{opacity:0;transform:translate(-50%,20px)}to{opacity:1;transform:translate(-50%,0)}}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:9999;padding:16px;overflow-y:auto}
-.modal.open{display:block}
-.mbox{max-width:1100px;margin:20px auto;background:#0d0d12;border:1px solid #262626;border-radius:16px;padding:24px}
-.mhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid #1f1f28}
-.mhead h3{color:#ff2e63;font-size:18px}
-.mhead button{background:transparent;border:1px solid #333;color:#888;padding:6px 12px;border-radius:6px;cursor:pointer;font-family:inherit}
-.mstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:16px}
-.mstat{background:#141418;border:1px solid #262626;border-radius:8px;padding:12px;text-align:center}
-.mstat .n{font-size:22px;font-weight:800;color:#ff2e63}
-.mstat .l{font-size:10px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
-.mform{background:#141418;border:1px solid #262626;border-radius:10px;padding:14px;margin-bottom:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end}
-.mform label{display:block;color:#888;font-size:11px;text-transform:uppercase;margin-bottom:4px}
-.mform input{width:100%;padding:8px 10px;background:#0a0a0f;border:1px solid #333;color:#fff;border-radius:6px;font-family:inherit;font-size:13px}
-.mform button{grid-column:1/-1;padding:10px;background:linear-gradient(135deg,#ff2e63,#ff0055);color:#fff;border:none;border-radius:6px;cursor:pointer;font-family:inherit;font-weight:600;font-size:13px}
-.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-.tools button{flex:1;padding:10px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:12px;font-weight:600;background:#1f1f28;border:1px solid;min-width:120px}
-.tools .t-txt{color:#29b6f6;border-color:#29b6f6}
-.tools .t-csv{color:#2ecc71;border-color:#2ecc71}
-.tools .t-ref{color:#3498db;border-color:#3498db}
-.tools .t-del{color:#e74c3c;border-color:#e74c3c}
-table{width:100%;border-collapse:collapse;background:#141418;border-radius:10px;overflow:hidden;font-size:12px}
-th{background:#1a1a20;color:#ff2e63;padding:10px 8px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
-td{padding:10px 8px;border-top:1px solid #1f1f28;color:#c0c0d0}
-.kc{font-family:monospace;color:#f39c12;cursor:pointer;font-size:11px}
-.kc:hover{color:#ff2e63;text-decoration:underline}
-.tag{padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600}
+body{
+    font-family:system-ui,sans-serif;
+    background:#08080c;color:#e8e8ec;
+    min-height:100vh;
+}
+body::before{
+    content:'';position:fixed;inset:0;
+    background:radial-gradient(circle at 50% 30%,rgba(255,46,99,.12),transparent 60%);
+    pointer-events:none;
+}
+/* GİRİŞ */
+.login-wrap{
+    position:relative;z-index:2;
+    display:flex;align-items:center;justify-content:center;
+    min-height:100vh;padding:20px;
+}
+.login-box{
+    background:#111;border:1px solid #222;
+    border-radius:16px;padding:40px 32px;
+    width:100%;max-width:380px;
+    box-shadow:0 20px 60px rgba(255,46,99,.15);
+}
+.login-box h1{
+    text-align:center;font-size:22px;
+    color:#ff2e63;letter-spacing:4px;
+    margin-bottom:8px;font-weight:800;
+}
+.login-box p{
+    text-align:center;color:#666;
+    font-size:12px;margin-bottom:32px;
+    letter-spacing:2px;text-transform:uppercase;
+}
+.login-box input{
+    width:100%;padding:14px 16px;
+    background:#0a0a0f;border:1px solid #333;
+    color:#fff;border-radius:8px;
+    font-family:inherit;font-size:14px;
+    margin-bottom:16px;letter-spacing:1px;
+}
+.login-box input:focus{
+    outline:none;border-color:#ff2e63;
+    box-shadow:0 0 0 3px rgba(255,46,99,.1);
+}
+.login-box button{
+    width:100%;padding:14px;
+    background:linear-gradient(135deg,#ff2e63,#ff0055);
+    color:#fff;border:none;border-radius:8px;
+    font-family:inherit;font-weight:700;
+    font-size:14px;letter-spacing:2px;
+    cursor:pointer;transition:all .2s;
+}
+.login-box button:hover{transform:translateY(-1px)}
+.err{
+    color:#e74c3c;font-size:12px;
+    text-align:center;margin-top:12px;
+}
+/* PANEL */
+.panel{
+    display:none;position:relative;z-index:2;
+    max-width:1200px;margin:0 auto;
+    padding:30px 20px;
+}
+.panel.open{display:block}
+.header{
+    display:flex;justify-content:space-between;
+    align-items:center;margin-bottom:24px;
+    padding-bottom:16px;
+    border-bottom:1px solid #222;
+}
+.header h1{
+    color:#ff2e63;font-size:18px;
+    letter-spacing:3px;font-weight:800;
+}
+.header button{
+    padding:8px 16px;background:transparent;
+    color:#888;border:1px solid #333;
+    border-radius:6px;cursor:pointer;
+    font-family:inherit;font-size:12px;
+}
+.header button:hover{color:#e74c3c;border-color:#e74c3c}
+/* İSTATİSTİK */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(110px,1fr));
+    gap:10px;margin-bottom:20px;
+}
+.stat{
+    background:#111;border:1px solid #222;
+    border-radius:10px;padding:14px;
+    text-align:center;
+}
+.stat .n{font-size:22px;font-weight:800;color:#ff2e63}
+.stat .l{font-size:10px;color:#666;text-transform:uppercase;
+         letter-spacing:1px;margin-top:4px}
+/* FORM */
+.form{
+    background:#111;border:1px solid #222;
+    border-radius:10px;padding:16px;
+    margin-bottom:16px;
+    display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+.form label{
+    display:block;color:#888;font-size:11px;
+    text-transform:uppercase;letter-spacing:1px;
+    margin-bottom:6px;
+}
+.form input{
+    width:100%;padding:10px 12px;
+    background:#0a0a0f;border:1px solid #333;
+    color:#fff;border-radius:6px;
+    font-family:inherit;font-size:13px;
+}
+.form input:focus{outline:none;border-color:#ff2e63}
+.form button{
+    grid-column:1/-1;padding:12px;
+    background:linear-gradient(135deg,#ff2e63,#ff0055);
+    color:#fff;border:none;border-radius:8px;
+    cursor:pointer;font-family:inherit;
+    font-weight:700;font-size:13px;
+    letter-spacing:1px;
+}
+/* TOOLS */
+.tools{
+    display:flex;gap:10px;flex-wrap:wrap;
+    margin-bottom:16px;
+}
+.tools button{
+    flex:1;min-width:130px;padding:10px;
+    background:#1a1a20;border:1px solid #333;
+    color:#c0c0d0;border-radius:6px;
+    cursor:pointer;font-family:inherit;
+    font-size:12px;font-weight:600;
+}
+.tools button:hover{border-color:#ff2e63;color:#ff2e63}
+/* TABLO */
+table{
+    width:100%;border-collapse:collapse;
+    background:#111;border-radius:10px;
+    overflow:hidden;font-size:12px;
+}
+th{
+    background:#1a1a20;color:#ff2e63;
+    padding:10px 8px;text-align:left;
+    font-size:10px;text-transform:uppercase;
+    letter-spacing:1px;
+}
+td{padding:10px 8px;border-top:1px solid #1a1a1a;color:#c0c0d0}
+tr:hover td{background:#151515}
+.key-code{
+    font-family:monospace;color:#f39c12;
+    cursor:pointer;font-size:11px;
+}
+.key-code:hover{color:#ff2e63;text-decoration:underline}
+.tag{
+    padding:2px 8px;border-radius:4px;
+    font-size:10px;font-weight:600;
+}
 .t-ok{background:#0d2b1e;color:#2ecc71}
 .t-no{background:#2b0d0d;color:#e74c3c}
 .t-w{background:#2b210d;color:#f39c12}
-td button{padding:4px 10px;border-radius:4px;cursor:pointer;font-family:inherit;font-size:11px;background:transparent}
-.btn-del{color:#e74c3c;border:1px solid #e74c3c}
-.btn-del:hover{background:#e74c3c;color:#fff}
-.btn-hwid{color:#f39c12;border:1px solid #f39c12}
-.btn-hwid:hover{background:#f39c12;color:#fff}
+.t-lock{background:#0d1f2b;color:#3498db}
+td button{
+    padding:4px 8px;border-radius:4px;
+    font-family:inherit;font-size:11px;
+    cursor:pointer;background:transparent;
+    border:1px solid #333;color:#888;
+    margin-right:4px;
+}
+td button:hover{border-color:#ff2e63;color:#ff2e63}
 .empty{text-align:center;padding:30px;color:#666}
+.toast{
+    position:fixed;bottom:20px;left:50%;
+    transform:translateX(-50%);
+    background:#141418;border:1px solid #2a2a35;
+    border-radius:10px;padding:14px 22px;
+    color:#fff;z-index:9999;font-size:13px;
+    box-shadow:0 12px 40px rgba(0,0,0,.6);
+}
 </style>
 </head>
 <body>
 
-<header>
-  <nav>
-    <div class="logo">◈ AZRAIL MOD</div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <a href="https://t.me/azrailno1" target="_blank" class="btn-tg">💬 Telegram</a>
-      <button class="btn-admin" onclick="adminLogin()">🔐 Admin</button>
+<!-- GİRİŞ EKRANI -->
+<div class="login-wrap" id="loginWrap">
+    <div class="login-box">
+        <h1>AZRAIL PANEL</h1>
+        <p>Yetkili Girişi</p>
+        <input id="passInput" type="password" placeholder="Şifre" autocomplete="off">
+        <button onclick="tryLogin()">GİRİŞ</button>
+        <div class="err" id="loginErr"></div>
     </div>
-  </nav>
-</header>
-
-<div class="hero">
-  <h1>PUBG Mobile için<br><span class="grad">Premium Mod Sistemi</span></h1>
-  <p>Anında teslim, cihaz kilitli, otomatik doğrulama.</p>
-  <div class="btns">
-    <button class="btn btn-p" onclick="document.getElementById('planlar').scrollIntoView({behavior:'smooth'})">Planları Gör</button>
-    <a href="https://t.me/azrailno1" target="_blank" class="btn btn-g">💬 Telegram'a Yaz</a>
-  </div>
 </div>
 
-<section id="planlar">
-  <h2>PLANLAR</h2>
-  <div class="plans">
-    <div class="plan">
-      <div class="plan-name">Günlük</div>
-      <div class="plan-price">₺50<small>/gün</small></div>
-      <button onclick="selectPlan('Günlük',50)">SATIN AL</button>
+<!-- PANEL -->
+<div class="panel" id="panel">
+    <div class="header">
+        <h1>◈ AZRAIL PANEL</h1>
+        <button onclick="logout()">ÇIKIŞ</button>
     </div>
-    <div class="plan featured">
-      <div class="plan-name">Haftalık ★</div>
-      <div class="plan-price">₺200<small>/hafta</small></div>
-      <button onclick="selectPlan('Haftalık',200)">SATIN AL</button>
-    </div>
-    <div class="plan">
-      <div class="plan-name">Aylık</div>
-      <div class="plan-price">₺600<small>/ay</small></div>
-      <button onclick="selectPlan('Aylık',600)">SATIN AL</button>
-    </div>
-  </div>
-</section>
 
-<footer>
-  <div style="margin-bottom:10px">
-    <a href="https://t.me/azrailno1" target="_blank">💬 Telegram: @azrailno1</a>
-  </div>
-  © 2026 AZRAIL MOD — Tüm hakları saklıdır.
-</footer>
+    <div class="stats" id="stats"></div>
 
-<div class="modal" id="adminModal">
-  <div class="mbox">
-    <div class="mhead">
-      <h3>🔐 ADMIN PANEL</h3>
-      <button onclick="adminClose()">Kapat</button>
+    <div class="form">
+        <div>
+            <label>Süre (gün)</label>
+            <input id="keyDays" type="number" value="30" min="1">
+        </div>
+        <div>
+            <label>Adet</label>
+            <input id="keyCount" type="number" value="1" min="1" max="50">
+        </div>
+        <button onclick="generateKeys()">YENİ KEY ÜRET</button>
     </div>
-    <div class="mstats" id="mstats"></div>
-    <div class="mform">
-      <div><label>Süre (gün)</label><input id="keyDays" type="number" value="30" min="1"></div>
-      <div><label>Adet</label><input id="keyCount" type="number" value="1" min="1" max="50"></div>
-      <button onclick="generateKeys()">YENİ KEY ÜRET</button>
-    </div>
+
     <div class="tools">
-      <button class="t-txt" onclick="downloadKeysTxt()">📥 azrail_keys.txt İndir</button>
-      <button class="t-csv" onclick="exportCSV()">📥 CSV İndir</button>
-      <button class="t-ref" onclick="renderKeys()">🔄 Yenile</button>
-      <button class="t-del" onclick="clearAll()">🗑 Tümünü Sil</button>
+        <button onclick="renderKeys()">🔄 Yenile</button>
+        <button onclick="exportCSV()">📥 CSV İndir</button>
+        <button onclick="clearAll()">🗑 Tümünü Sil</button>
     </div>
+
     <div id="keysList"></div>
-  </div>
 </div>
 
 <script>
+// ============ AYARLAR ============
 var ADMIN_PASS = 'emirbaba01';
 var JSONBIN_KEY = '$2a$10$aylfWvcqSLY25nwWrDUJKuqVBq1vm/9L2IPse7yIyblAFQKsDMIoy';
 var JSONBIN_BIN = '6aca79faffd5d160535f9c47';
 var JSONBIN_URL = 'https://api.jsonbin.io/v3/b/' + JSONBIN_BIN;
 
-function toast(html, color){
+// ============ GİRİŞ ============
+function tryLogin(){
+    var p = document.getElementById('passInput').value;
+    if(p === ADMIN_PASS){
+        document.getElementById('loginWrap').style.display = 'none';
+        document.getElementById('panel').classList.add('open');
+        renderKeys();
+    } else {
+        document.getElementById('loginErr').textContent = 'Hatalı şifre.';
+    }
+}
+document.getElementById('passInput').addEventListener('keydown', function(e){
+    if(e.key === 'Enter') tryLogin();
+});
+
+function logout(){
+    location.reload();
+}
+
+// ============ TOAST ============
+function toast(msg, color){
     var t = document.createElement('div');
     t.className = 'toast';
     t.style.borderColor = color || '#2a2a35';
-    t.innerHTML = html;
+    t.textContent = msg;
     document.body.appendChild(t);
     setTimeout(function(){
         t.style.opacity = '0';
         t.style.transition = 'opacity .3s';
         setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); }, 300);
-    }, 4000);
+    }, 3500);
 }
 
+// ============ JSONBIN ============
 async function loadKeys(){
     try {
         var res = await fetch(JSONBIN_URL + '/latest', {
@@ -173,7 +277,7 @@ async function loadKeys(){
         });
         var data = await res.json();
         return (data.record && data.record.keys) || [];
-    } catch(e){ console.error(e); return []; }
+    } catch(e) { return []; }
 }
 
 async function saveKeys(keys){
@@ -187,45 +291,10 @@ async function saveKeys(keys){
             body: JSON.stringify({ keys: keys })
         });
         return res.ok;
-    } catch(e){ console.error(e); return false; }
+    } catch(e) { return false; }
 }
 
-async function keyCheck(){
-    var k = prompt('Key kodunu gir:');
-    if(!k || k.trim() === '') return;
-    k = k.trim().toUpperCase();
-    if(k.length < 8){ toast('<span style="color:#e74c3c">✗</span> Geçersiz key.', '#e74c3c'); return; }
-    toast('<span style="color:#f39c12">⏳</span> Sorgulanıyor...', '#f39c12');
-    var keys = await loadKeys();
-    var found = null;
-    for(var i = 0; i < keys.length; i++){
-        if(keys[i].key === k){ found = keys[i]; break; }
-    }
-    if(!found){ toast('<span style="color:#e74c3c">✗</span> Key bulunamadı.', '#e74c3c'); return; }
-    if(found.banned){ toast('<span style="color:#e74c3c">✗</span> Bu key banlı.', '#e74c3c'); return; }
-    if(found.expires * 1000 < Date.now()){ toast('<span style="color:#e74c3c">✗</span> Key süresi dolmuş.', '#e74c3c'); return; }
-    var kalan = Math.floor((found.expires * 1000 - Date.now()) / 86400000);
-    toast('<span style="color:#2ecc71">✓</span> Aktif — ' + kalan + ' gün kaldı', '#2ecc71');
-}
-
-function selectPlan(name, price){
-    toast('<b style="color:#ff2e63">🛒 ' + name + ' Plan</b><br>Fiyat: <b>₺' + price + '</b><br><span style="font-size:12px;color:#8a8a9a">Satın almak için Telegram: @azrailno1</span>', '#ff2e63');
-}
-
-function adminLogin(){
-    var p = prompt('Admin şifresi:');
-    if(p === ADMIN_PASS){
-        document.getElementById('adminModal').classList.add('open');
-        document.body.style.overflow = 'hidden';
-        renderKeys();
-    } else if(p !== null){ alert('Hatalı şifre.'); }
-}
-
-function adminClose(){
-    document.getElementById('adminModal').classList.remove('open');
-    document.body.style.overflow = '';
-}
-
+// ============ KEY ÜRET ============
 function genKey(){
     var c = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', parts = [];
     for(var p = 0; p < 4; p++){
@@ -243,16 +312,22 @@ async function generateKeys(){
     var now = Math.floor(Date.now() / 1000);
     for(var i = 0; i < cnt; i++){
         keys.push({
-            key: genKey(), days: days, hwid: null, created: now,
-            expires: now + days * 86400, banned: false,
-            usage_count: 0, last_used: 0
+            key: genKey(),
+            days: days,
+            created: now,
+            expires: now + days * 86400,
+            hwid: null,
+            banned: false,
+            usage_count: 0,
+            last_used: 0
         });
     }
     var ok = await saveKeys(keys);
-    if(ok){ renderKeys(); toast('<span style="color:#2ecc71">✓</span> ' + cnt + ' key üretildi.', '#2ecc71'); }
-    else { toast('<span style="color:#e74c3c">✗</span> Kaydedilemedi!', '#e74c3c'); }
+    if(ok){ renderKeys(); toast('✓ ' + cnt + ' key üretildi.'); }
+    else { toast('✗ Kaydedilemedi!', '#e74c3c'); }
 }
 
+// ============ LİSTELE ============
 async function renderKeys(){
     var keys = await loadKeys();
     var now = Math.floor(Date.now() / 1000);
@@ -262,12 +337,12 @@ async function renderKeys(){
         else if(k.expires < now) suresi++;
         else { aktif++; if(k.hwid) kilitli++; }
     });
-    document.getElementById('mstats').innerHTML =
-        '<div class="mstat"><div class="n">' + keys.length + '</div><div class="l">Toplam</div></div>' +
-        '<div class="mstat"><div class="n" style="color:#2ecc71">' + aktif + '</div><div class="l">Aktif</div></div>' +
-        '<div class="mstat"><div class="n" style="color:#3498db">' + kilitli + '</div><div class="l">Kilitli</div></div>' +
-        '<div class="mstat"><div class="n" style="color:#f39c12">' + suresi + '</div><div class="l">Dolmuş</div></div>' +
-        '<div class="mstat"><div class="n" style="color:#e74c3c">' + banli + '</div><div class="l">Banlı</div></div>';
+    document.getElementById('stats').innerHTML =
+        '<div class="stat"><div class="n">' + keys.length + '</div><div class="l">Toplam</div></div>' +
+        '<div class="stat"><div class="n" style="color:#2ecc71">' + aktif + '</div><div class="l">Aktif</div></div>' +
+        '<div class="stat"><div class="n" style="color:#3498db">' + kilitli + '</div><div class="l">HWID Kilitli</div></div>' +
+        '<div class="stat"><div class="n" style="color:#f39c12">' + suresi + '</div><div class="l">Süresi Dolmuş</div></div>' +
+        '<div class="stat"><div class="n" style="color:#e74c3c">' + banli + '</div><div class="l">Banlı</div></div>';
 
     var list = document.getElementById('keysList');
     if(keys.length === 0){
@@ -282,44 +357,67 @@ async function renderKeys(){
         var st = k.banned ? '<span class="tag t-no">BAN</span>'
                : (left < 0 ? '<span class="tag t-w">DOLDU</span>' : '<span class="tag t-ok">' + dl + 'g</span>');
         var hwidShort = k.hwid ? k.hwid.substring(0, 10) + '…' : '—';
+        var hwidTxt = k.hwid ? '<span class="tag t-lock">KİLİTLİ</span>' : '—';
         var lastUsed = k.last_used ? new Date(k.last_used * 1000).toLocaleString('tr-TR') : '—';
         h += '<tr>';
-        h += '<td><span class="kc" onclick="copyKey(\'' + k.key + '\')">' + k.key + '</span></td>';
+        h += '<td><span class="key-code" onclick="copyKey(\'' + k.key + '\')">' + k.key + '</span></td>';
         h += '<td>' + k.days + 'g</td>';
         h += '<td style="color:#3498db">' + (k.usage_count || 0) + '</td>';
-        h += '<td style="font-size:11px;color:#666">' + hwidShort + '</td>';
+        h += '<td style="font-size:11px">' + (k.hwid ? hwidShort + ' ' + hwidTxt : '—') + '</td>';
         h += '<td style="font-size:11px;color:#666">' + lastUsed + '</td>';
         h += '<td>' + st + '</td>';
         h += '<td style="white-space:nowrap">';
-        h += '<button class="btn-del" onclick="delKey(' + i + ')">Sil</button> ';
-        if(k.hwid) h += '<button class="btn-hwid" onclick="resetHWID(' + i + ')">HWID</button>';
+        h += '<button onclick="delKey(' + i + ')">Sil</button>';
+        if(k.hwid) h += '<button onclick="resetHWID(' + i + ')">HWID Sıfırla</button>';
+        if(!k.banned) h += '<button onclick="banKey(' + i + ')">Ban</button>';
+        else h += '<button onclick="unbanKey(' + i + ')">Unban</button>';
         h += '</td></tr>';
     });
     h += '</table></div>';
     list.innerHTML = h;
 }
 
+// ============ İŞLEMLER ============
 async function delKey(i){
     if(!confirm('Silinsin mi?')) return;
     var keys = await loadKeys();
     keys.splice(i, 1);
     await saveKeys(keys);
     renderKeys();
+    toast('✓ Silindi.');
 }
 
 async function resetHWID(i){
-    if(!confirm('HWID sıfırlansın mı?')) return;
+    if(!confirm('HWID sıfırlansın mı? Yeni cihaz bağlanabilir.')) return;
     var keys = await loadKeys();
     keys[i].hwid = null;
     await saveKeys(keys);
     renderKeys();
-    toast('<span style="color:#2ecc71">✓</span> HWID sıfırlandı.', '#2ecc71');
+    toast('✓ HWID sıfırlandı.');
+}
+
+async function banKey(i){
+    if(!confirm('Banlansın mı?')) return;
+    var keys = await loadKeys();
+    keys[i].banned = true;
+    await saveKeys(keys);
+    renderKeys();
+    toast('✓ Banlandı.');
+}
+
+async function unbanKey(i){
+    var keys = await loadKeys();
+    keys[i].banned = false;
+    await saveKeys(keys);
+    renderKeys();
+    toast('✓ Ban kaldırıldı.');
 }
 
 async function clearAll(){
     if(!confirm('TÜM keyler silinecek. Emin misin?')) return;
     await saveKeys([]);
     renderKeys();
+    toast('✓ Tümü silindi.');
 }
 
 function copyKey(k){
@@ -329,41 +427,25 @@ function copyKey(k){
         t.value = k; document.body.appendChild(t); t.select();
         document.execCommand('copy'); document.body.removeChild(t);
     }
-    toast('<span style="color:#2ecc71">✓</span> Kopyalandı: ' + k, '#2ecc71');
-}
-
-function downloadKeysTxt(){
-    loadKeys().then(function(keys){
-        if(keys.length === 0){ toast('Önce key üret.', '#e74c3c'); return; }
-        var txt = '';
-        keys.forEach(function(k){
-            txt += k.key + '|' + k.expires + '\n';
-        });
-        var blob = new Blob([txt], {type:'text/plain'});
-        var url = URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url; a.download = 'azrail_keys.txt'; a.click();
-        URL.revokeObjectURL(url);
-        toast('<span style="color:#2ecc71">✓</span> azrail_keys.txt indirildi. /sdcard/ klasörüne koy.', '#2ecc71');
-    });
+    toast('✓ Kopyalandı: ' + k);
 }
 
 function exportCSV(){
     loadKeys().then(function(keys){
-        if(keys.length === 0){ toast('Önce key üret.', '#e74c3c'); return; }
+        if(keys.length === 0){ toast('Key yok.', '#e74c3c'); return; }
         var csv = 'key,days,expires,hwid,banned,usage_count,last_used\n';
         keys.forEach(function(k){
-            csv += k.key + ',' + k.days + ',' + k.expires + ',' + (k.hwid||'') + ',' + (k.banned?1:0) + ',' + (k.usage_count||0) + ',' + (k.last_used||0) + '\n';
+            csv += [k.key, k.days, k.expires, k.hwid||'', k.banned?1:0, k.usage_count||0, k.last_used||0].join(',') + '\n';
         });
         var blob = new Blob([csv], {type:'text/csv'});
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');
         a.href = url; a.download = 'keys.csv'; a.click();
         URL.revokeObjectURL(url);
-        toast('<span style="color:#2ecc71">✓</span> CSV indirildi.', '#2ecc71');
+        toast('✓ CSV indirildi.');
     });
 }
 </script>
 
 </body>
-                                </html>
+</html>
