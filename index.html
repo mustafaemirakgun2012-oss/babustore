@@ -10,16 +10,17 @@ body{font-family:system-ui,sans-serif;background:#08080c;color:#e8e8ec;line-heig
 header{background:rgba(8,8,12,.9);border-bottom:1px solid #222;padding:16px 24px;position:sticky;top:0;z-index:100}
 nav{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .logo{color:#ff2e63;font-weight:800;font-size:20px;font-family:monospace}
-nav button{padding:8px 16px;border-radius:8px;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:13px}
+nav button,nav a{padding:8px 16px;border-radius:8px;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:13px;text-decoration:none;display:inline-block}
+.btn-tg{background:transparent;color:#29b6f6;border:1px solid #29b6f6}
+.btn-tg:hover{background:rgba(41,182,246,.1)}
 .btn-admin{background:transparent;color:#f39c12;border:1px solid #f39c12}
 .btn-admin:hover{background:rgba(243,156,18,.1)}
-.btn-cta{background:linear-gradient(135deg,#ff2e63,#ff0055);color:#fff}
 .hero{max-width:1200px;margin:0 auto;padding:80px 24px;text-align:center}
 h1{font-size:clamp(36px,6vw,64px);font-weight:900;letter-spacing:-2px;margin-bottom:20px}
 .grad{background:linear-gradient(135deg,#ff2e63,#8b2eff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero p{font-size:18px;color:#8a8a9a;max-width:600px;margin:0 auto 32px}
 .btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.btn{padding:14px 28px;border-radius:10px;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:15px;transition:all .2s}
+.btn{padding:14px 28px;border-radius:10px;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:15px;transition:all .2s;text-decoration:none;display:inline-block}
 .btn-p{background:linear-gradient(135deg,#ff2e63,#ff0055);color:#fff;box-shadow:0 8px 24px rgba(255,46,99,.3)}
 .btn-p:hover{transform:translateY(-2px)}
 .btn-g{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.1)}
@@ -35,11 +36,12 @@ h2{font-size:32px;font-weight:800;text-align:center;margin-bottom:40px;color:#ff
 .plan button{width:100%;padding:12px;background:#ff2e63;color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:700;font-size:14px}
 .plan button:hover{background:#ff0055}
 footer{border-top:1px solid #222;padding:32px 24px;text-align:center;color:#666;font-size:13px;margin-top:60px}
+footer a{color:#29b6f6;text-decoration:none}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#141418;border:1px solid #2a2a35;border-radius:10px;padding:14px 22px;color:#fff;z-index:99999;font-size:14px;box-shadow:0 12px 40px rgba(0,0,0,.6);max-width:90vw;animation:tin .3s ease}
 @keyframes tin{from{opacity:0;transform:translate(-50%,20px)}to{opacity:1;transform:translate(-50%,0)}}
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:9999;padding:16px;overflow-y:auto}
 .modal.open{display:block}
-.mbox{max-width:1000px;margin:20px auto;background:#0d0d12;border:1px solid #262626;border-radius:16px;padding:24px}
+.mbox{max-width:1100px;margin:20px auto;background:#0d0d12;border:1px solid #262626;border-radius:16px;padding:24px}
 .mhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid #1f1f28}
 .mhead h3{color:#ff2e63;font-size:18px}
 .mhead button{background:transparent;border:1px solid #333;color:#888;padding:6px 12px;border-radius:6px;cursor:pointer;font-family:inherit}
@@ -51,6 +53,12 @@ footer{border-top:1px solid #222;padding:32px 24px;text-align:center;color:#666;
 .mform label{display:block;color:#888;font-size:11px;text-transform:uppercase;margin-bottom:4px}
 .mform input{width:100%;padding:8px 10px;background:#0a0a0f;border:1px solid #333;color:#fff;border-radius:6px;font-family:inherit;font-size:13px}
 .mform button{grid-column:1/-1;padding:10px;background:linear-gradient(135deg,#ff2e63,#ff0055);color:#fff;border:none;border-radius:6px;cursor:pointer;font-family:inherit;font-weight:600;font-size:13px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.tools button{flex:1;padding:10px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:12px;font-weight:600;background:#1f1f28;border:1px solid;min-width:120px}
+.tools .t-txt{color:#29b6f6;border-color:#29b6f6}
+.tools .t-csv{color:#2ecc71;border-color:#2ecc71}
+.tools .t-ref{color:#3498db;border-color:#3498db}
+.tools .t-del{color:#e74c3c;border-color:#e74c3c}
 table{width:100%;border-collapse:collapse;background:#141418;border-radius:10px;overflow:hidden;font-size:12px}
 th{background:#1a1a20;color:#ff2e63;padding:10px 8px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
 td{padding:10px 8px;border-top:1px solid #1f1f28;color:#c0c0d0}
@@ -65,6 +73,7 @@ td button{padding:4px 10px;border-radius:4px;cursor:pointer;font-family:inherit;
 .btn-del:hover{background:#e74c3c;color:#fff}
 .btn-hwid{color:#f39c12;border:1px solid #f39c12}
 .btn-hwid:hover{background:#f39c12;color:#fff}
+.empty{text-align:center;padding:30px;color:#666}
 </style>
 </head>
 <body>
@@ -73,8 +82,8 @@ td button{padding:4px 10px;border-radius:4px;cursor:pointer;font-family:inherit;
   <nav>
     <div class="logo">◈ AZRAIL MOD</div>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a href="https://t.me/azrailno1" target="_blank" class="btn-tg">💬 Telegram</a>
       <button class="btn-admin" onclick="adminLogin()">🔐 Admin</button>
-      <button class="btn-cta" onclick="toast('Yakında aktif.','#ff2e63')">Giriş Yap</button>
     </div>
   </nav>
 </header>
@@ -84,7 +93,7 @@ td button{padding:4px 10px;border-radius:4px;cursor:pointer;font-family:inherit;
   <p>Anında teslim, cihaz kilitli, otomatik doğrulama.</p>
   <div class="btns">
     <button class="btn btn-p" onclick="document.getElementById('planlar').scrollIntoView({behavior:'smooth'})">Planları Gör</button>
-    <button class="btn btn-g" onclick="keyCheck()">Key Sorgula</button>
+    <a href="https://t.me/azrailno1" target="_blank" class="btn btn-g">💬 Telegram'a Yaz</a>
   </div>
 </div>
 
@@ -109,7 +118,12 @@ td button{padding:4px 10px;border-radius:4px;cursor:pointer;font-family:inherit;
   </div>
 </section>
 
-<footer>© 2026 AZRAIL MOD — Tüm hakları saklıdır.</footer>
+<footer>
+  <div style="margin-bottom:10px">
+    <a href="https://t.me/azrailno1" target="_blank">💬 Telegram: @azrailno1</a>
+  </div>
+  © 2026 AZRAIL MOD — Tüm hakları saklıdır.
+</footer>
 
 <div class="modal" id="adminModal">
   <div class="mbox">
@@ -123,19 +137,18 @@ td button{padding:4px 10px;border-radius:4px;cursor:pointer;font-family:inherit;
       <div><label>Adet</label><input id="keyCount" type="number" value="1" min="1" max="50"></div>
       <button onclick="generateKeys()">YENİ KEY ÜRET</button>
     </div>
-    <div style="margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap">
-      <button onclick="renderKeys()" style="flex:1;padding:10px;background:#1f1f28;color:#3498db;border:1px solid #3498db;border-radius:6px;cursor:pointer;font-family:inherit">🔄 Yenile</button>
-      <button onclick="exportCSV()" style="flex:1;padding:10px;background:#1f1f28;color:#2ecc71;border:1px solid #2ecc71;border-radius:6px;cursor:pointer;font-family:inherit">📥 CSV</button>
-      <button onclick="clearAll()" style="flex:1;padding:10px;background:#1f1f28;color:#e74c3c;border:1px solid #e74c3c;border-radius:6px;cursor:pointer;font-family:inherit">🗑 Tümü Sil</button>
+    <div class="tools">
+      <button class="t-txt" onclick="downloadKeysTxt()">📥 azrail_keys.txt İndir</button>
+      <button class="t-csv" onclick="exportCSV()">📥 CSV İndir</button>
+      <button class="t-ref" onclick="renderKeys()">🔄 Yenile</button>
+      <button class="t-del" onclick="clearAll()">🗑 Tümünü Sil</button>
     </div>
     <div id="keysList"></div>
   </div>
 </div>
 
 <script>
-var ADMIN_PASS = 'deni123';
-
-// ⚠️ YENİ MASTER KEY OLUŞTURUNCA BURAYI DEĞİŞTİR
+var ADMIN_PASS = 'emirbaba01';
 var JSONBIN_KEY = '$2a$10$aylfWvcqSLY25nwWrDUJKuqVBq1vm/9L2IPse7yIyblAFQKsDMIoy';
 var JSONBIN_BIN = '6aca79faffd5d160535f9c47';
 var JSONBIN_URL = 'https://api.jsonbin.io/v3/b/' + JSONBIN_BIN;
@@ -153,17 +166,17 @@ function toast(html, color){
     }, 4000);
 }
 
-async function loadKeys() {
+async function loadKeys(){
     try {
         var res = await fetch(JSONBIN_URL + '/latest', {
             headers: { 'X-Master-Key': JSONBIN_KEY }
         });
         var data = await res.json();
         return (data.record && data.record.keys) || [];
-    } catch(e) { console.error(e); return []; }
+    } catch(e){ console.error(e); return []; }
 }
 
-async function saveKeys(keys) {
+async function saveKeys(keys){
     try {
         var res = await fetch(JSONBIN_URL, {
             method: 'PUT',
@@ -174,7 +187,7 @@ async function saveKeys(keys) {
             body: JSON.stringify({ keys: keys })
         });
         return res.ok;
-    } catch(e) { console.error(e); return false; }
+    } catch(e){ console.error(e); return false; }
 }
 
 async function keyCheck(){
@@ -196,7 +209,7 @@ async function keyCheck(){
 }
 
 function selectPlan(name, price){
-    toast('<b style="color:#ff2e63">🛒 ' + name + ' Plan</b><br>Fiyat: <b>₺' + price + '</b>', '#ff2e63');
+    toast('<b style="color:#ff2e63">🛒 ' + name + ' Plan</b><br>Fiyat: <b>₺' + price + '</b><br><span style="font-size:12px;color:#8a8a9a">Satın almak için Telegram: @azrailno1</span>', '#ff2e63');
 }
 
 function adminLogin(){
@@ -258,7 +271,7 @@ async function renderKeys(){
 
     var list = document.getElementById('keysList');
     if(keys.length === 0){
-        list.innerHTML = '<div style="text-align:center;padding:30px;color:#666">Henüz key yok.</div>';
+        list.innerHTML = '<div class="empty">Henüz key yok.</div>';
         return;
     }
     var h = '<div style="overflow-x:auto"><table>';
@@ -279,7 +292,7 @@ async function renderKeys(){
         h += '<td>' + st + '</td>';
         h += '<td style="white-space:nowrap">';
         h += '<button class="btn-del" onclick="delKey(' + i + ')">Sil</button> ';
-        if(k.hwid) h += '<button class="btn-hwid" onclick="resetHWID(' + i + ')">HWID Sıfırla</button>';
+        if(k.hwid) h += '<button class="btn-hwid" onclick="resetHWID(' + i + ')">HWID</button>';
         h += '</td></tr>';
     });
     h += '</table></div>';
@@ -319,6 +332,22 @@ function copyKey(k){
     toast('<span style="color:#2ecc71">✓</span> Kopyalandı: ' + k, '#2ecc71');
 }
 
+function downloadKeysTxt(){
+    loadKeys().then(function(keys){
+        if(keys.length === 0){ toast('Önce key üret.', '#e74c3c'); return; }
+        var txt = '';
+        keys.forEach(function(k){
+            txt += k.key + '|' + k.expires + '\n';
+        });
+        var blob = new Blob([txt], {type:'text/plain'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url; a.download = 'azrail_keys.txt'; a.click();
+        URL.revokeObjectURL(url);
+        toast('<span style="color:#2ecc71">✓</span> azrail_keys.txt indirildi. /sdcard/ klasörüne koy.', '#2ecc71');
+    });
+}
+
 function exportCSV(){
     loadKeys().then(function(keys){
         if(keys.length === 0){ toast('Önce key üret.', '#e74c3c'); return; }
@@ -337,4 +366,4 @@ function exportCSV(){
 </script>
 
 </body>
-  </html>
+                                </html>
